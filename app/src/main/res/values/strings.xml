@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Habit for Reddit</string>
+    <string name="launcher_label">Habit</string>
 </resources>
