@@ -27,6 +27,9 @@ fun oAuthService(): ApplicationOnlyAuth {
     return retrofit.create(ApplicationOnlyAuth::class.java)
 }
 
+/**
+ * Request interface for userless authentication
+ */
 interface ApplicationOnlyAuth {
     @FormUrlEncoded
     @POST("/api/v1/access_token")
