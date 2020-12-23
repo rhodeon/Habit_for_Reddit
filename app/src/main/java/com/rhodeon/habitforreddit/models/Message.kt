@@ -3,7 +3,7 @@ package com.rhodeon.habitforreddit.models
 import com.squareup.moshi.Json
 
 /**
- * Created by Ogheneruona Onobrakpeya on 12/23/20.
+ * Created by Ruona Onobrakpeya on 12/23/20.
  * Source: https://github.com/reddit-archive/reddit/wiki/JSON#message-implements-created
  */
 
@@ -25,5 +25,5 @@ data class Message(
 
     // Implemented from Created
     @field:Json(name = "created")val creationTimeLocal: Long,
-    @field:Json(name = "creation_utc") val creationTimeUtc: Long
+    @field:Json(name = "created_utc") val creationTimeUtc: Long
 )

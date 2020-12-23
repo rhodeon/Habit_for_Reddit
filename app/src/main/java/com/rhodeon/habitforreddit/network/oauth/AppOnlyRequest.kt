@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
- * Created by Ogheneruona Onobrakpeya on 12/19/20.
+ * Created by Ruona Onobrakpeya on 12/19/20.
  */
 
 suspend fun requestAccessToken(): String? {

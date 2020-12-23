@@ -42,9 +42,11 @@ android {
 }
 
 ext {
-    md_version = "1.2.1"
+    material_version = "1.2.1"
     retrofit_version = "2.9.0"
     coroutine_version = "1.4.0"
+    navigation_version = "2.3.2"
+    viewmodel_version = "2.2.0"
 
 }
 
@@ -58,8 +60,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    // Material Design
+    implementation "com.google.android.material:material:$material_version"
 
-    implementation "com.google.android.material:material:$md_version"
+    // Navigation Components
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    // Architecture Components
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel_version"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"

@@ -10,7 +10,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 /**
- * Created by Ogheneruona Onobrakpeya on 12/19/20.
+ * Created by Ruona Onobrakpeya on 12/19/20.
  */
 
 val client: OkHttpClient = OkHttpClient.Builder().apply {

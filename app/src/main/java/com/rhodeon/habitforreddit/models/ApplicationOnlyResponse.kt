@@ -3,7 +3,7 @@ package com.rhodeon.habitforreddit.models
 import com.squareup.moshi.Json
 
 /**
- * Created by Ogheneruona Onobrakpeya on 12/19/20.
+ * Created by Ruona Onobrakpeya on 12/19/20.
  */
 
 /**

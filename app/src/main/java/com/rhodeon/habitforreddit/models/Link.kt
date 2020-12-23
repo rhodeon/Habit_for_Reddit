@@ -3,7 +3,7 @@ package com.rhodeon.habitforreddit.models
 import com.squareup.moshi.Json
 
 /**
- * Created by Ogheneruona Onobrakpeya on 12/23/20.
+ * Created by Ruona Onobrakpeya on 12/23/20.
  * Source: https://github.com/reddit-archive/reddit/wiki/JSON#link-implements-votable--created
  */
 
@@ -34,7 +34,7 @@ data class Link(
 
     // Implemented from Created
     @field:Json(name = "created")val creationTimeLocal: Long,
-    @field:Json(name = "creation_utc") val creationTimeUtc: Long,
+    @field:Json(name = "created_utc") val creationTimeUtc: Long,
 
     // Implemented from Votable
     @field:Json(name = "ups") val upvotes: Int,
@@ -43,7 +43,7 @@ data class Link(
 
     // Media
     // TODO: Handle media objects.
-    @field:Json(name = "media") val media: Any,
+    @field:Json(name = "media") val media: Any?,
     @field:Json(name = "media_embed") val mediaEmbed: Any,
     @field:Json(name = "thumbnail") val thumbnail: String
 

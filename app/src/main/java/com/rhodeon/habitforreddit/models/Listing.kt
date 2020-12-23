@@ -1,7 +1,7 @@
 package com.rhodeon.habitforreddit.models
 
 /**
- * Created by Ogheneruona Onobrakpeya on 12/23/20.
+ * Created by Ruona Onobrakpeya on 12/23/20.
  * Source: https://github.com/reddit-archive/reddit/wiki/JSON#listing
  */
 
