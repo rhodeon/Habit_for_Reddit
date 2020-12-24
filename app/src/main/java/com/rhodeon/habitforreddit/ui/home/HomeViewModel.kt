@@ -3,7 +3,9 @@ package com.rhodeon.habitforreddit.ui.home
 import androidx.lifecycle.*
 import com.rhodeon.habitforreddit.models.Thing
 import com.rhodeon.habitforreddit.network.api.SubredditRequests
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -20,9 +22,17 @@ class HomeViewModelFactory(private val token: String?): ViewModelProvider.Factor
 
 }
 
+
+
 class HomeViewModel(private val token: String?) : ViewModel() {
     private val _response = MutableLiveData<Thing>()
     val response: LiveData<Thing> = _response
+
+    init {
+        CoroutineScope( Dispatchers.IO).launch {
+            getPosts()
+        }
+    }
 
     suspend fun getPosts() {
         withContext( Dispatchers.IO) {

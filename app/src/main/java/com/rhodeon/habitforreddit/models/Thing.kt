@@ -8,9 +8,10 @@ package com.rhodeon.habitforreddit.models
  * Reddit base class.
  * Source: https://github.com/reddit-archive/reddit/wiki/JSON#thing-reddit-base-class
  */
-data class Thing(
-    val id: String? = null,
-    val name: String? = null,
-    val kind: String,
-    val data: Data
+data class Thing (
+//    val id: String? = null
+//    val name: String? = null
+     val kind: String,
+     val data: Data
+
 )

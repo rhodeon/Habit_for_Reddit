@@ -62,6 +62,8 @@ class SubredditRequests(val token: String) {
                 }
                 else {
                     Log.e("RequestToken", "code: ${response.code()} message:${response.message()}")
+                    Log.e("RequestToken", "${response.headers()}")
+
                     null
                 }
             }

@@ -6,5 +6,5 @@ package com.rhodeon.habitforreddit.models
 
 data class Data(
     val dist: Int,
-    val children: List<Thing>
+    val children: List<LinkThing>
 )

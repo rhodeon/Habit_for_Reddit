@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rhodeon.habitforreddit.databinding.FragmentHomeBinding
 import com.rhodeon.habitforreddit.databinding.ItemPostHeaderBinding
-import com.rhodeon.habitforreddit.models.Link
+import com.rhodeon.habitforreddit.models.LinkThing
 import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
 
 /**
@@ -15,8 +15,8 @@ import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
  */
 
 class HomeViewHolder(private val binding: ItemPostHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(link: Link) {
-        link.apply {
+    fun bind(link: LinkThing) {
+        link.data.apply {
             binding.title.text = title
             binding.username.text = author
             binding.subreddit.text = subreddit
@@ -26,9 +26,9 @@ class HomeViewHolder(private val binding: ItemPostHeaderBinding) : RecyclerView.
 
 }
 
-class HomeListAdapter : androidx.recyclerview.widget.ListAdapter<Link, HomeViewHolder>(DIFF_CALLBACK) {
+class HomeListAdapter : androidx.recyclerview.widget.ListAdapter<LinkThing, HomeViewHolder>(DIFF_CALLBACK) {
     companion object {
-        val DIFF_CALLBACK : DiffUtil.ItemCallback<Link> by DiffCallbackDelegate()
+        val DIFF_CALLBACK : DiffUtil.ItemCallback<LinkThing> by DiffCallbackDelegate()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {

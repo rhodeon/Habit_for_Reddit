@@ -7,7 +7,12 @@ import com.squareup.moshi.Json
  * Source: https://github.com/reddit-archive/reddit/wiki/JSON#link-implements-votable--created
  */
 
-data class Link(
+data class LinkThing (
+    @field:Json(name = "kind") val kind: String,
+    @field:Json(name = "data") val data: LinkData
+)
+
+data class LinkData(
     @field:Json(name = "author") val author: String?,
     @field:Json(name = "author_flair_css_class") val authorFlairCss: String,
     @field:Json(name = "author_flair_text") val authorFlair: String,

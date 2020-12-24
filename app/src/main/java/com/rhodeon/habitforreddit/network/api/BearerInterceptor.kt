@@ -13,7 +13,7 @@ class BearerInterceptor(val token: String) : Interceptor {
         val request = chain.request()
             .newBuilder()
             .addHeader("Authorization", "Bearer $token")
-//            .addHeader("User-Agent", USER_AGENT)
+            .addHeader("User-Agent", USER_AGENT)
             .build()
 
         return chain.proceed(request)

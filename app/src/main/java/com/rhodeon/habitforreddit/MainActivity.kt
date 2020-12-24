@@ -11,9 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.rhodeon.habitforreddit.databinding.ActivityMainBinding
 import com.rhodeon.habitforreddit.network.api.SubredditRequests
 import com.rhodeon.habitforreddit.network.oauth.requestAccessToken
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -24,21 +22,38 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        binding.bottomNavigationView.setupWithNavController(navController)
+        binding.button.setOnClickListener {
+        runBlocking {
+            CoroutineScope(Dispatchers.Main).launch {
+                withContext(Dispatchers.Main) {
+                    val newToken = requestAccessToken()
+                    Toast.makeText(this@MainActivity, "$newToken", Toast.LENGTH_SHORT).show()
+                    if (newToken != null) {
+                        token = newToken
+                    }
+
+                    getSharedPreferences("vars", Context.MODE_PRIVATE).edit {
+                        putString("token", token)
+                    }
+
+                    val request = SubredditRequests(token)
+                    request.subreddits()
+
+//
+//                    val navController = findNavController(R.id.nav_host_fragment)
+//                    val navGraph = navController.navInflater.inflate(R.navigation.main_nav)
+//                    navGraph.startDestination = R.id.homeFragment
+//                    navController.graph = navGraph
+//                    binding.bottomNavigationView.setupWithNavController(navController)
+                }
 
 
-        CoroutineScope(Dispatchers.Main).launch {
-            val newToken = requestAccessToken()
-            Toast.makeText(this@MainActivity, "$newToken", Toast.LENGTH_SHORT).show()
-            if (newToken != null) {
-                token = newToken
             }
         }
-
-        getSharedPreferences("vars", Context.MODE_PRIVATE).edit {
-            putString("token", token)
         }
+
+
+
 
     }
 //
