@@ -2,10 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_nav">
+    android:id="@+id/main_nav"
+    tools:ignore="UnusedNavigation">
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.rhodeon.habitforreddit.ui.home.HomeFragment"
+        android:id="@+id/homeFeedFragment"
+        android:name="com.rhodeon.habitforreddit.ui.home.HomeFeedFragment"
         android:label="SubredditFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home_feed"/>
 </navigation>
