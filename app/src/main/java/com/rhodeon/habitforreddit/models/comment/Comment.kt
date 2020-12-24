@@ -1,4 +1,4 @@
-package com.rhodeon.habitforreddit.models
+package com.rhodeon.habitforreddit.models.comment
 
 import com.squareup.moshi.Json
 
@@ -19,7 +19,7 @@ data class Comment (
     @field:Json(name = "link_title") val linkTitle: String,
     @field:Json(name = "link_url") val linkUrl: String,
     @field:Json(name = "parent_id") val parentId: String,
-    @field:Json(name = "replies") val replies: List<Thing>,
+    @field:Json(name = "replies") val replies: List<Comment>,
     @field:Json(name = "saved") val isSaved: Boolean,
     @field:Json(name = "score") val score: Int,
     @field:Json(name = "score_hidden") val isScoreHidden: Boolean,

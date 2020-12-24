@@ -1,4 +1,4 @@
-package com.rhodeon.habitforreddit.models
+package com.rhodeon.habitforreddit.models.subreddit
 
 import com.squareup.moshi.Json
 

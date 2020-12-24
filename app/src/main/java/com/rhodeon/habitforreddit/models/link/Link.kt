@@ -1,4 +1,4 @@
-package com.rhodeon.habitforreddit.models
+package com.rhodeon.habitforreddit.models.link
 
 import com.squareup.moshi.Json
 
@@ -7,7 +7,7 @@ import com.squareup.moshi.Json
  * Source: https://github.com/reddit-archive/reddit/wiki/JSON#link-implements-votable--created
  */
 
-data class LinkThing (
+data class Link(
     @field:Json(name = "kind") val kind: String,
     @field:Json(name = "data") val data: LinkData
 )
@@ -51,9 +51,4 @@ data class LinkData(
     @field:Json(name = "media") val media: Any?,
     @field:Json(name = "media_embed") val mediaEmbed: Any,
     @field:Json(name = "thumbnail") val thumbnail: String
-
-
-
-
-
 )
