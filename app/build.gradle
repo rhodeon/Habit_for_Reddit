@@ -47,6 +47,7 @@ ext {
     coroutine_version = "1.4.0"
     navigation_version = "2.3.2"
     viewmodel_version = "2.2.0"
+    coil_version = "1.1.0"
 
 }
 
@@ -76,4 +77,7 @@ dependencies {
 
     // Coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+
+    // Coil
+    implementation "io.coil-kt:coil:$coil_version"
 }

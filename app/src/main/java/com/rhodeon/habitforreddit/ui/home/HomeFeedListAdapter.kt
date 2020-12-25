@@ -2,8 +2,10 @@ package com.rhodeon.habitforreddit.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.rhodeon.habitforreddit.databinding.ItemPostHeaderBinding
 import com.rhodeon.habitforreddit.models.link.Link
 import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
@@ -19,6 +21,11 @@ class HomeViewHolder(private val binding: ItemPostHeaderBinding) : RecyclerView.
             binding.username.text = author
             binding.subreddit.text = subreddit
             binding.karma.text = score.toString()
+
+            when(thumbnail) {
+                "self", "image", "default" -> binding.thumbnail.isGone = true
+                else -> binding.thumbnail.load(thumbnail)
+            }
         }
     }
 
