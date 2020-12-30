@@ -8,5 +8,13 @@
         android:id="@+id/homeFeedFragment"
         android:name="com.rhodeon.habitforreddit.ui.home.HomeFeedFragment"
         android:label="SubredditFragment"
-        tools:layout="@layout/fragment_home_feed"/>
+        tools:layout="@layout/fragment_home_feed">
+        <action
+            android:id="@+id/action_homeFeedFragment_to_menuBottomDialogFragment"
+            app:destination="@id/menuBottomDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/menuBottomDialogFragment"
+        android:name="com.rhodeon.habitforreddit.ui.menu.MenuBottomDialogFragment"
+        android:label="MenuBottomDialogFragment" />
 </navigation>
