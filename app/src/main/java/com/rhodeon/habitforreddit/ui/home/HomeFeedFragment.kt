@@ -49,7 +49,7 @@ class HomeFeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = HomeListAdapter()
-        binding.postRecyclerView.adapter = adapter
+        binding.postRecyclerView.root.adapter = adapter
 //        binding.postRecyclerView.addItemDecoration(DividerItemDecoration(this.requireContext(), DividerItemDecoration.VERTICAL))
 
         val viewModelObserver = Observer<LinkListing> { response ->
