@@ -1,19 +1,19 @@
-package com.rhodeon.habitforreddit.ui.menu
+package com.rhodeon.habitforreddit.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.rhodeon.habitforreddit.databinding.FragmentMenuBottomDialogBinding
+import com.rhodeon.habitforreddit.databinding.FragmentSearchDialogBinding
 
 /**
  * Created by Ruona Onobrakpeya on 12/30/20.
  */
 
-class MenuBottomDialogFragment : BottomSheetDialogFragment() {
-    private var _binding: FragmentMenuBottomDialogBinding? = null
+class SearchDialogFragment : DialogFragment() {
+    private var _binding: FragmentSearchDialogBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -21,24 +21,25 @@ class MenuBottomDialogFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMenuBottomDialogBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.goTo.setOnClickListener {
-            goToClickHandler()
+        binding.goToButton.setOnClickListener {
+            val location = binding.enterSubreddit.text.toString()
+            findNavController().navigate(
+                SearchDialogFragmentDirections.actionSearchDialogFragmentToSubredditFragment(
+                    location
+                )
+            )
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    fun goToClickHandler() {
-        findNavController().navigate(MenuBottomDialogFragmentDirections.actionMenuBottomDialogFragmentToSearchDialogFragment())
     }
 }

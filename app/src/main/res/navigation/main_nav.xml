@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    tools:ignore="UnusedNavigation">
+    tools:ignore="UnusedNavigation"
+    app:startDestination="@id/searchDialogFragment">
     <fragment
         android:id="@+id/homeFeedFragment"
         android:name="com.rhodeon.habitforreddit.ui.home.HomeFeedFragment"
@@ -16,5 +17,28 @@
     <dialog
         android:id="@+id/menuBottomDialogFragment"
         android:name="com.rhodeon.habitforreddit.ui.menu.MenuBottomDialogFragment"
-        android:label="MenuBottomDialogFragment" />
+        android:label="MenuBottomDialogFragment"
+        tools:layout="@layout/fragment_menu_bottom_dialog">
+        <action
+            android:id="@+id/action_menuBottomDialogFragment_to_searchDialogFragment"
+            app:destination="@id/searchDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/searchDialogFragment"
+        android:name="com.rhodeon.habitforreddit.ui.search.SearchDialogFragment"
+        android:label="SearchDialogFragment"
+        tools:layout="@layout/fragment_search_dialog">
+        <action
+            android:id="@+id/action_searchDialogFragment_to_subredditFragment"
+            app:destination="@id/subredditFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/subredditFragment"
+        android:name="com.rhodeon.habitforreddit.ui.subreddit.SubredditFragment"
+        android:label="SubredditFragment"
+        tools:layout="@layout/fragment_subreddit">
+        <argument
+            android:name="location"
+            app:argType="string" />
+    </fragment>
 </navigation>
