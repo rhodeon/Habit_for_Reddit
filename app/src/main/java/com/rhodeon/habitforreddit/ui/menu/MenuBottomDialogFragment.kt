@@ -38,7 +38,7 @@ class MenuBottomDialogFragment : BottomSheetDialogFragment() {
         _binding = null
     }
 
-    fun goToClickHandler() {
+    private fun goToClickHandler() {
         findNavController().navigate(MenuBottomDialogFragmentDirections.actionMenuBottomDialogFragmentToSearchDialogFragment())
     }
 }
