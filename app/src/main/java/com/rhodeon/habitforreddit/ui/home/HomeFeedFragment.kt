@@ -9,7 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.rhodeon.habitforreddit.databinding.FragmentHomeFeedBinding
+import com.rhodeon.habitforreddit.models.link.Link
 import com.rhodeon.habitforreddit.models.link.LinkListing
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Created by Ruona Onobrakpeya on 12/23/20.
@@ -21,7 +25,7 @@ class HomeFeedFragment : Fragment() {
 
     private lateinit var homeViewModelFactory: HomeViewModelFactory
     private val homeViewModel: HomeViewModel by viewModels(
-        factoryProducer = {homeViewModelFactory}
+        factoryProducer = { homeViewModelFactory }
     )
 
     override fun onCreateView(
@@ -32,36 +36,51 @@ class HomeFeedFragment : Fragment() {
 
         val token = requireActivity().getSharedPreferences("vars", Context.MODE_PRIVATE)
             .getString("token", null)
-
         Toast.makeText(requireContext(), "tok: $token", Toast.LENGTH_SHORT).show()
-
         homeViewModelFactory = HomeViewModelFactory(token)
 
         _binding = FragmentHomeFeedBinding.inflate(inflater, container, false)
-
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigate(HomeFeedFragmentDirections.actionHomeFeedFragmentToMenuBottomDialogFragment())
-        }
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = HomeListAdapter()
+        binding.toolbar.setNavigationOnClickListener {
+            showBottomDialog()
+        }
+
+        val adapter = HomeListAdapter {
+            navigateToComments(it)
+        }
         binding.postRecyclerView.root.adapter = adapter
-//        binding.postRecyclerView.addItemDecoration(DividerItemDecoration(this.requireContext(), DividerItemDecoration.VERTICAL))
 
         val viewModelObserver = Observer<LinkListing> { response ->
             adapter.submitList(response.data.children)
         }
         homeViewModel.response.observe(viewLifecycleOwner, viewModelObserver)
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun showBottomDialog() {
+        findNavController()
+            .navigate(HomeFeedFragmentDirections.actionHomeFeedFragmentToMenuBottomDialogFragment())
+    }
+
+    private fun navigateToComments(link: Link) {
+        val token = requireActivity().getSharedPreferences("vars", Context.MODE_PRIVATE)
+            .getString("token", null)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val action = HomeFeedFragmentDirections.actionHomeFeedFragmentToCommentsFragment(
+                token = token!!,
+                permalink = link.data.permalink
+            )
+            findNavController().navigate(action)
+        }
     }
 }

@@ -5,6 +5,6 @@ package com.rhodeon.habitforreddit.models.link
  */
 
 data class LinkListingData(
-    val dist: Int,
+    val dist: Int?,
     val children: List<Link>
 )

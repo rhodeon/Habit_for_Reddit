@@ -13,29 +13,29 @@ import androidx.navigation.fragment.navArgs
 import com.rhodeon.habitforreddit.databinding.FragmentSubredditBinding
 import com.rhodeon.habitforreddit.models.link.LinkListing
 import com.rhodeon.habitforreddit.ui.home.HomeFeedFragmentDirections
-import com.rhodeon.habitforreddit.ui.home.HomeListAdapter
 
 /**
  * Created by Ruona Onobrakpeya on 12/30/20.
  */
 
 class SubredditFragment : Fragment() {
-    private var _binding: FragmentSubredditBinding? = null
-    private val binding get() = _binding!!
+    private val args: SubredditFragmentArgs by navArgs()
+    private lateinit var subredditViewModelFactory: SubredditViewModelFactory
     private val subredditViewModel: SubredditViewModel by viewModels(
         factoryProducer = {subredditViewModelFactory}
     )
-    private lateinit var subredditViewModelFactory: SubredditViewModelFactory
-    private val args: SubredditFragmentArgs by navArgs()
+
+    private var _binding: FragmentSubredditBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val token = requireActivity().getSharedPreferences("vars", Context.MODE_PRIVATE)
             .getString("token", null)
-
         subredditViewModelFactory = SubredditViewModelFactory(token, args.location)
 
         _binding = FragmentSubredditBinding.inflate(inflater, container, false)
@@ -52,7 +52,7 @@ class SubredditFragment : Fragment() {
 
         setTitle()
 
-        val adapter = HomeListAdapter()
+        val adapter = SubredditListAdapter()
         binding.postRecyclerView.root.adapter = adapter
 
         val viewModelObserver = Observer<LinkListing> { response ->

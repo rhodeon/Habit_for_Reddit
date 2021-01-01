@@ -1,5 +1,6 @@
 package com.rhodeon.habitforreddit.network.api.subreddit
 
+import com.rhodeon.habitforreddit.models.comment.CommentListing
 import com.rhodeon.habitforreddit.models.link.LinkListing
 import com.rhodeon.habitforreddit.network.api.BearerInterceptor
 import okhttp3.OkHttpClient
@@ -28,10 +29,15 @@ class SubredditRequests(private val token: String) {
     }
 
     interface Subreddit {
-        @GET()
+        @GET
         suspend fun getPosts(
             @Url() url: String,
             @Query("limit") limit: Int
         ): Response<LinkListing>
+
+        @GET
+        suspend fun getComments(
+            @Url() url: String
+        ): Response<List<CommentListing>>
     }
 }

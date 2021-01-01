@@ -14,6 +14,26 @@ import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
  * Created by Ruona Onobrakpeya on 12/23/20.
  */
 
+class HomeListAdapter(
+    val clickHandler: (Link) -> Unit
+) : androidx.recyclerview.widget.ListAdapter<Link, HomeViewHolder>(DIFF_CALLBACK) {
+    companion object {
+        val DIFF_CALLBACK : DiffUtil.ItemCallback<Link> by DiffCallbackDelegate()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
+        val binding = ItemPostHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return HomeViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+        holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            clickHandler(getItem(position))
+        }
+    }
+}
+
 class HomeViewHolder(private val binding: ItemPostHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(link: Link) {
         link.data.apply {
@@ -27,21 +47,5 @@ class HomeViewHolder(private val binding: ItemPostHeaderBinding) : RecyclerView.
                 else -> binding.thumbnail.load(thumbnail)
             }
         }
-    }
-
-}
-
-class HomeListAdapter : androidx.recyclerview.widget.ListAdapter<Link, HomeViewHolder>(DIFF_CALLBACK) {
-    companion object {
-        val DIFF_CALLBACK : DiffUtil.ItemCallback<Link> by DiffCallbackDelegate()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val binding = ItemPostHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HomeViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.bind(getItem(position))
     }
 }

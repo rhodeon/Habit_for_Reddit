@@ -14,6 +14,21 @@ import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
  * Created by Ruona Onobrakpeya on 12/23/20.
  */
 
+class SubredditListAdapter : androidx.recyclerview.widget.ListAdapter<Link, SubredditViewHolder>(DIFF_CALLBACK) {
+    companion object {
+        val DIFF_CALLBACK : DiffUtil.ItemCallback<Link> by DiffCallbackDelegate()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubredditViewHolder {
+        val binding = ItemPostHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SubredditViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: SubredditViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+}
+
 class SubredditViewHolder(private val binding: ItemPostHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(link: Link) {
         link.data.apply {
@@ -27,20 +42,5 @@ class SubredditViewHolder(private val binding: ItemPostHeaderBinding) : Recycler
                 else -> binding.thumbnail.load(thumbnail)
             }
         }
-    }
-}
-
-class SubredditListAdapter : androidx.recyclerview.widget.ListAdapter<Link, SubredditViewHolder>(DIFF_CALLBACK) {
-    companion object {
-        val DIFF_CALLBACK : DiffUtil.ItemCallback<Link> by DiffCallbackDelegate()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubredditViewHolder {
-        val binding = ItemPostHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SubredditViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: SubredditViewHolder, position: Int) {
-        holder.bind(getItem(position))
     }
 }

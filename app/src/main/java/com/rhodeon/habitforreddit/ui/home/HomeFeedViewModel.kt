@@ -3,6 +3,8 @@ package com.rhodeon.habitforreddit.ui.home
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.*
+import com.rhodeon.habitforreddit.models.comment.CommentListing
+import com.rhodeon.habitforreddit.models.link.Link
 import com.rhodeon.habitforreddit.models.link.LinkListing
 import com.rhodeon.habitforreddit.network.api.subreddit.SubredditRequests
 import kotlinx.coroutines.CoroutineScope
@@ -64,6 +66,31 @@ class HomeViewModel(private val token: String?) : ViewModel() {
                 null
             }
         }
+    }
 
+    suspend fun getComments(link: Link) {
+        /*return*/ withContext(Dispatchers.IO) {
+            try {
+                val response = SubredditRequests(token!!).oAuthService2().getComments(
+                    url = link.data.permalink
+                )
+
+                val commentResponse: List<CommentListing>? = response.body()
+
+                if (commentResponse != null) {
+                    Log.i("HomeFeedViewModel", "comment success: ${commentResponse}" )
+                }
+                else {
+                    Log.e("HomeFeedViewModel", "code: ${response.code()} message:${response.message()}")
+                    Log.e("HomeFeedViewModel", "${response.headers()}")
+                    null
+                }
+            }
+            catch (e: Exception) {
+                Log.e("HomeFeedViewModel", "Error Retrieving Comments: $e")
+                null
+            }
+
+        }
     }
 }

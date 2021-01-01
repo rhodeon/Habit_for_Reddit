@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFeedFragment_to_menuBottomDialogFragment"
             app:destination="@id/menuBottomDialogFragment" />
+        <action
+            android:id="@+id/action_homeFeedFragment_to_commentsFragment"
+            app:destination="@id/threadFragment" />
     </fragment>
     <dialog
         android:id="@+id/menuBottomDialogFragment"
@@ -39,6 +42,18 @@
         tools:layout="@layout/fragment_subreddit">
         <argument
             android:name="location"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/threadFragment"
+        android:name="com.rhodeon.habitforreddit.ui.thread.ThreadFragment"
+        android:label="threadFragment"
+        tools:layout="@layout/fragment_thread">
+        <argument
+            android:name="token"
+            app:argType="string" />
+        <argument
+            android:name="permalink"
             app:argType="string" />
     </fragment>
 </navigation>

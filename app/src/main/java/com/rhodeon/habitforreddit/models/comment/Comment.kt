@@ -7,7 +7,12 @@ import com.squareup.moshi.Json
  * Source: https://github.com/reddit-archive/reddit/wiki/JSON#comment-implements-votable--created
  */
 
-data class Comment (
+data class Comment(
+    @field:Json(name = "kind") val kind: String,
+    @field:Json(name = "data") val data: CommentData
+)
+
+data class CommentData (
     @field:Json(name = "author") val author: String,
     @field:Json(name = "author_flair_css_class") val authorFlairCss: String,
     @field:Json(name = "author_flair_text") val authorFlair: String,
@@ -19,7 +24,7 @@ data class Comment (
     @field:Json(name = "link_title") val linkTitle: String,
     @field:Json(name = "link_url") val linkUrl: String,
     @field:Json(name = "parent_id") val parentId: String,
-    @field:Json(name = "replies") val replies: List<Comment>,
+    @field:Json(name = "replies") val replies: Any,
     @field:Json(name = "saved") val isSaved: Boolean,
     @field:Json(name = "score") val score: Int,
     @field:Json(name = "score_hidden") val isScoreHidden: Boolean,
