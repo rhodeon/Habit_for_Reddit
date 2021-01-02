@@ -1,6 +1,5 @@
 package com.rhodeon.habitforreddit.ui.subreddit
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,9 +33,7 @@ class SubredditFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val token = requireActivity().getSharedPreferences("vars", Context.MODE_PRIVATE)
-            .getString("token", null)
-        subredditViewModelFactory = SubredditViewModelFactory(token, args.location)
+        subredditViewModelFactory = SubredditViewModelFactory(args.location)
 
         _binding = FragmentSubredditBinding.inflate(inflater, container, false)
 

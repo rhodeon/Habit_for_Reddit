@@ -1,11 +1,9 @@
 package com.rhodeon.habitforreddit.ui.thread
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -33,10 +31,7 @@ class ThreadFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val token = requireActivity().getSharedPreferences("vars", Context.MODE_PRIVATE)
-            .getString("token", null)
-        Toast.makeText(requireContext(), "tok: $token", Toast.LENGTH_SHORT).show()
-        factory = CommentsViewModelFactory(token!!, args.permalink)
+        factory = CommentsViewModelFactory(args.permalink)
 
         _binding = FragmentThreadBinding.inflate(inflater, container, false)
         return  binding.root

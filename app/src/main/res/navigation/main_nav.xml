@@ -50,9 +50,6 @@
         android:label="threadFragment"
         tools:layout="@layout/fragment_thread">
         <argument
-            android:name="token"
-            app:argType="string" />
-        <argument
             android:name="permalink"
             app:argType="string" />
     </fragment>

@@ -3,7 +3,6 @@ package com.rhodeon.habitforreddit.ui.home
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -22,23 +21,13 @@ import kotlinx.coroutines.launch
 class HomeFeedFragment : Fragment() {
     private var _binding: FragmentHomeFeedBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var homeViewModelFactory: HomeViewModelFactory
-    private val homeViewModel: HomeViewModel by viewModels(
-        factoryProducer = { homeViewModelFactory }
-    )
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        val token = requireActivity().getSharedPreferences("vars", Context.MODE_PRIVATE)
-            .getString("token", null)
-        Toast.makeText(requireContext(), "tok: $token", Toast.LENGTH_SHORT).show()
-        homeViewModelFactory = HomeViewModelFactory(token)
-
         _binding = FragmentHomeFeedBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -72,15 +61,9 @@ class HomeFeedFragment : Fragment() {
     }
 
     private fun navigateToComments(link: Link) {
-        val token = requireActivity().getSharedPreferences("vars", Context.MODE_PRIVATE)
-            .getString("token", null)
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val action = HomeFeedFragmentDirections.actionHomeFeedFragmentToCommentsFragment(
-                token = token!!,
-                permalink = link.data.permalink
-            )
-            findNavController().navigate(action)
-        }
+        val action = HomeFeedFragmentDirections.actionHomeFeedFragmentToCommentsFragment(
+            permalink = link.data.permalink
+        )
+        findNavController().navigate(action)
     }
 }
