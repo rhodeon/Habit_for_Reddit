@@ -16,9 +16,6 @@
         <action
             android:id="@+id/action_homeFeedFragment_to_commentsFragment"
             app:destination="@id/threadFragment" />
-        <action
-            android:id="@+id/action_homeFeedFragment_to_tabTestFragment"
-            app:destination="@id/tabTestFragment" />
     </fragment>
     <dialog
         android:id="@+id/menuBottomDialogFragment"
@@ -59,11 +56,6 @@
             android:name="permalink"
             app:argType="string" />
     </fragment>
-    <fragment
-        android:id="@+id/tabTestFragment"
-        android:name="com.rhodeon.habitforreddit.TabTestFragment"
-        android:label="TabTestFragment"
-        tools:layout="@layout/fragment_tab_test"/>
     <fragment
         android:id="@+id/postListFragment"
         android:name="com.rhodeon.habitforreddit.ui.postList.PostListFragment"

@@ -1,18 +1,14 @@
 package com.rhodeon.habitforreddit.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.rhodeon.habitforreddit.databinding.FragmentHomeFeedBinding
-import com.rhodeon.habitforreddit.models.link.Link
-import com.rhodeon.habitforreddit.models.link.LinkListing
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.rhodeon.habitforreddit.ui.postList.PostListFragment
 
 /**
  * Created by Ruona Onobrakpeya on 12/23/20.
@@ -21,7 +17,7 @@ import kotlinx.coroutines.launch
 class HomeFeedFragment : Fragment() {
     private var _binding: FragmentHomeFeedBinding? = null
     private val binding get() = _binding!!
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeFeedViewModel: HomeFeedViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,15 +35,13 @@ class HomeFeedFragment : Fragment() {
             showBottomDialog()
         }
 
-        val adapter = HomeListAdapter {
-            navigateToComments(it)
-        }
-        binding.postRecyclerView.root.adapter = adapter
+        val postStateAdapter = PostStateAdapter(this, homeFeedViewModel)
+        binding.postPager.adapter = postStateAdapter
 
-        val viewModelObserver = Observer<LinkListing> { response ->
-            adapter.submitList(response.data.children)
-        }
-        homeViewModel.response.observe(viewLifecycleOwner, viewModelObserver)
+        TabLayoutMediator(binding.locationTab, binding.postPager) { tab, position ->
+            tab.text = homeFeedViewModel.locationList[position]
+        }.attach()
+
     }
 
     override fun onDestroy() {
@@ -59,11 +53,16 @@ class HomeFeedFragment : Fragment() {
         findNavController()
             .navigate(HomeFeedFragmentDirections.actionHomeFeedFragmentToMenuBottomDialogFragment())
     }
+}
 
-    private fun navigateToComments(link: Link) {
-        val action = HomeFeedFragmentDirections.actionHomeFeedFragmentToCommentsFragment(
-            permalink = link.data.permalink
-        )
-        findNavController().navigate(action)
+class PostStateAdapter(fragment: Fragment, val viewModel: HomeFeedViewModel) : FragmentStateAdapter(fragment) {
+    override fun getItemCount(): Int = viewModel.locationList.size
+
+    override fun createFragment(position: Int): Fragment {
+        val fragment = PostListFragment()
+        fragment.arguments = Bundle().apply {
+            putString("location", viewModel.locationList[position])
+        }
+        return fragment
     }
 }

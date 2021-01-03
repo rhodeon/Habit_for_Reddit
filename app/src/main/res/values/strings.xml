@@ -2,4 +2,5 @@
     <string name="app_name">Habit for Reddit</string>
     <string name="launcher_label">Habit</string>
     <string name="comments">Comments</string>
+    <string name="habit">Habit</string>
 </resources>

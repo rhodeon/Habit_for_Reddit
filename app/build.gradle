@@ -49,6 +49,7 @@ ext {
     navigation_version = "2.3.2"
     viewmodel_version = "2.2.0"
     coil_version = "1.1.0"
+    viewpager2_version = "1.0.0"
 
 }
 
@@ -72,6 +73,9 @@ dependencies {
 
     // Architecture Components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel_version"
+
+    // ViewPager 2
+    implementation "androidx.viewpager2:viewpager2:$viewpager2_version"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"

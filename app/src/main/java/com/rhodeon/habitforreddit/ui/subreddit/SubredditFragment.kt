@@ -5,15 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.rhodeon.habitforreddit.databinding.FragmentSubredditBinding
-import com.rhodeon.habitforreddit.models.link.Link
-import com.rhodeon.habitforreddit.models.link.LinkListing
 import com.rhodeon.habitforreddit.ui.home.HomeFeedFragmentDirections
 import com.rhodeon.habitforreddit.ui.postList.PostListFragment
 
