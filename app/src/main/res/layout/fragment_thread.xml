@@ -16,8 +16,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:navigationIcon="?attr/homeAsUpIndicator"
             android:title="@string/comments" />
     </com.google.android.material.appbar.AppBarLayout>
 

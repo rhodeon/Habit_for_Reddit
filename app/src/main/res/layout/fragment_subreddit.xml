@@ -20,7 +20,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:navigationIcon="@drawable/ic_baseline_view_headline_24"
+                android:navigationIcon="?attr/homeAsUpIndicator"
                 tools:title="Habit" />
         </com.google.android.material.appbar.AppBarLayout>
 

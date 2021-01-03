@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.rhodeon.habitforreddit.databinding.FragmentThreadBinding
 import com.rhodeon.habitforreddit.models.comment.CommentListing
@@ -39,6 +40,10 @@ class ThreadFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
         val adapter = CommentsListAdapter()
         binding.commentRecyclerView.adapter = adapter

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.findNavController
 import com.rhodeon.habitforreddit.databinding.FragmentSearchDialogBinding
+import com.rhodeon.habitforreddit.extensions.navigateSafe
 
 /**
  * Created by Ruona Onobrakpeya on 12/30/20.
@@ -30,7 +30,7 @@ class SearchDialogFragment : DialogFragment() {
 
         binding.goToButton.setOnClickListener {
             val location = binding.enterSubreddit.text.toString()
-            findNavController().navigate(
+            navigateSafe(
                 SearchDialogFragmentDirections.actionSearchDialogFragmentToSubredditFragment(
                     location
                 )

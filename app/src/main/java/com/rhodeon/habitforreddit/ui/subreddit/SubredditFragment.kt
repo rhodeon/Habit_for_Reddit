@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.rhodeon.habitforreddit.databinding.FragmentSubredditBinding
-import com.rhodeon.habitforreddit.ui.home.HomeFeedFragmentDirections
 import com.rhodeon.habitforreddit.ui.postList.PostListFragment
 
 /**
@@ -38,7 +37,7 @@ class SubredditFragment : Fragment() {
         _binding = FragmentSubredditBinding.inflate(inflater, container, false)
 
         binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigate(HomeFeedFragmentDirections.actionHomeFeedFragmentToMenuBottomDialogFragment())
+            findNavController().navigateUp()
         }
 
         return binding.root
@@ -74,4 +73,3 @@ class SubredditStateAdapter(fragment: Fragment, val location: String) : Fragment
         return fragment
     }
 }
-

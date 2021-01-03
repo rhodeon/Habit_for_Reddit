@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.rhodeon.habitforreddit.MainNavDirections
 import com.rhodeon.habitforreddit.databinding.FragmentPostListBinding
+import com.rhodeon.habitforreddit.extensions.navigateSafe
 import com.rhodeon.habitforreddit.models.link.Link
 import com.rhodeon.habitforreddit.models.link.LinkListing
 
@@ -61,6 +61,6 @@ class PostListFragment : Fragment() {
         val action = MainNavDirections.actionGlobalThreadFragment(
             permalink = link.data.permalink
         )
-        findNavController().navigate(action)
+        navigateSafe(action)
     }
 }
