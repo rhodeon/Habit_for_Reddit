@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.rhodeon.habitforreddit.databinding.FragmentMenuBottomDialogBinding
+import com.rhodeon.habitforreddit.extensions.navigateSafe
 
 /**
  * Created by Ruona Onobrakpeya on 12/30/20.
@@ -29,7 +30,7 @@ class MenuBottomDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.goTo.setOnClickListener {
-            goToClickHandler()
+            searchClickHandler()
         }
     }
 
@@ -38,7 +39,7 @@ class MenuBottomDialogFragment : BottomSheetDialogFragment() {
         _binding = null
     }
 
-    private fun goToClickHandler() {
-        findNavController().navigate(MenuBottomDialogFragmentDirections.actionMenuBottomDialogFragmentToSearchDialogFragment())
+    private fun searchClickHandler() {
+        navigateSafe(MenuBottomDialogFragmentDirections.actionMenuBottomDialogFragmentToSearchDialogFragment())
     }
 }

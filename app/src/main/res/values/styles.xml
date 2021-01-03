@@ -13,16 +13,17 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="BottomMenuItem" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">serif-monospace</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
-        <item name="layout_constraintHorizontal_bias">0.0</item>
-
-        <item name="android:layout_height">0dp</item>
+    <style name="BottomMenuSheetItem" parent="Widget.MaterialComponents.TextView">
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
 
-        <item name="android:layout_marginTop">16dp</item>
-        <item name="android:layout_marginStart">8dp</item>
-        <item name="android:layout_marginEnd">16dp</item>
+        <item name="fontFamily">serif-monospace</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+
+        <item name="android:padding">16dp</item>
+        <item name="android:drawablePadding">24dp</item>
+
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
     </style>
 </resources>

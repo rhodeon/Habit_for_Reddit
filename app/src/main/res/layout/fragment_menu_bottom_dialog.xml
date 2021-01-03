@@ -1,87 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/profileIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/profile"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/profile"
-        app:srcCompat="@drawable/ic_baseline_supervisor_account_24" />
-
-    <TextView
-        android:id="@+id/profile"
-        style="@style/BottomMenuItem"
-        android:text="Guest"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileIcon"
-        app:layout_constraintTop_toBottomOf="@+id/goTo" />
-
-    <ImageView
-        android:id="@+id/linkIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/openLink"
-        app:layout_constraintStart_toStartOf="@+id/profileIcon"
-        app:layout_constraintTop_toTopOf="@+id/openLink"
-        app:srcCompat="@drawable/ic_baseline_link_24" />
-
-    <TextView
-        android:id="@+id/openLink"
-        style="@style/BottomMenuItem"
-        android:text="Open Reddit Link"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/linkIcon"
-        app:layout_constraintTop_toBottomOf="@+id/profile" />
-
-    <ImageView
-        android:id="@+id/settingsIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/settings"
-        app:layout_constraintStart_toStartOf="@+id/linkIcon"
-        app:layout_constraintTop_toTopOf="@+id/settings"
-        app:srcCompat="@drawable/ic_baseline_settings_24" />
-
-    <TextView
-        android:id="@+id/settings"
-        style="@style/BottomMenuItem"
-        android:text="Settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/settingsIcon"
-        app:layout_constraintTop_toBottomOf="@+id/openLink" />
-
-    <ImageView
-        android:id="@+id/searchIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/goTo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/goTo"
-        app:srcCompat="@drawable/ic_baseline_search_24" />
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/goTo"
-        style="@style/BottomMenuItem"
-        android:text="Go To"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/searchIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+        style="@style/BottomMenuSheetItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/search"
+        app:drawableStartCompat="@drawable/ic_baseline_search_24" />
+
+    <TextView
+        android:id="@+id/profile"
+        style="@style/BottomMenuSheetItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/guest"
+        app:drawableStartCompat="@drawable/ic_baseline_supervisor_account_24" />
+
+    <TextView
+        android:id="@+id/openLink"
+        style="@style/BottomMenuSheetItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/open_reddit_link"
+        app:drawableStartCompat="@drawable/ic_baseline_link_24" />
+
+    <TextView
+        android:id="@+id/settings"
+        style="@style/BottomMenuSheetItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        app:drawableStartCompat="@drawable/ic_baseline_settings_24" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings"
         app:menu="@menu/bottom_nav" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
