@@ -10,11 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.rhodeon.habitforreddit.MainNavDirections
-import com.rhodeon.habitforreddit.R
 import com.rhodeon.habitforreddit.databinding.FragmentPostListBinding
 import com.rhodeon.habitforreddit.models.link.Link
 import com.rhodeon.habitforreddit.models.link.LinkListing
-import com.rhodeon.habitforreddit.ui.thread.ThreadFragment
 
 /**
  * Created by Ruona Onobrakpeya on 1/2/21.

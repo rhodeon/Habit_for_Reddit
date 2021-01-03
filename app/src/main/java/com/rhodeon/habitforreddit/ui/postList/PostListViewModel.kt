@@ -34,17 +34,17 @@ class PostListViewModel(val location: String) : ViewModel() {
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            updatePosts()
+            updatePosts(location)
         }
     }
 
-    suspend fun updatePosts() {
+    suspend fun updatePosts(location: String) {
         withContext(Dispatchers.IO) {
-            _response.postValue(loadPosts())
+            _response.postValue(loadPosts(location))
         }
     }
 
-    private suspend fun loadPosts(): LinkListing? {
+    private suspend fun loadPosts(location: String): LinkListing? {
         return withContext(Dispatchers.IO) {
             try {
                 val response = SubredditRequests(SessionManager.token).oAuthService2().getPosts(

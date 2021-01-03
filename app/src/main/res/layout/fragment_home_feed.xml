@@ -7,9 +7,9 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
+        style="@style/HabitToolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/HabitToolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Toolbar
             android:id="@+id/toolbar"
@@ -39,7 +39,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/postPager"
         android:layout_width="match_parent"
@@ -48,6 +47,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
