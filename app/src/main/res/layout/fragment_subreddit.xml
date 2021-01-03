@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,29 +16,24 @@
             app:layout_constraintTop_toTopOf="parent"
             style="@style/HabitToolbar">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
+            <Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
-
-                <Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:navigationIcon="@drawable/ic_baseline_view_headline_24"
-                    tools:title="Habit" />
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+                android:layout_height="wrap_content"
+                android:navigationIcon="@drawable/ic_baseline_view_headline_24"
+                tools:title="Habit" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include
-            android:id="@+id/postRecyclerView"
-            layout="@layout/view_posts_list"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/subredditPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appbar"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

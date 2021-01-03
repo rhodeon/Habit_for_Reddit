@@ -9,10 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.rhodeon.habitforreddit.MainNavDirections
+import com.rhodeon.habitforreddit.R
 import com.rhodeon.habitforreddit.databinding.FragmentPostListBinding
 import com.rhodeon.habitforreddit.models.link.Link
 import com.rhodeon.habitforreddit.models.link.LinkListing
-import com.rhodeon.habitforreddit.ui.subreddit.*
+import com.rhodeon.habitforreddit.ui.thread.ThreadFragment
 
 /**
  * Created by Ruona Onobrakpeya on 1/2/21.
@@ -58,7 +60,7 @@ class PostListFragment : Fragment() {
     }
 
     private fun navigateToComments(link: Link) {
-        val action = SubredditFragmentDirections.actionSubredditFragmentToThreadFragment(
+        val action = MainNavDirections.actionGlobalThreadFragment(
             permalink = link.data.permalink
         )
         findNavController().navigate(action)

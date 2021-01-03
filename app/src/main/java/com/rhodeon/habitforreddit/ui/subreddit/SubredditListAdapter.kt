@@ -14,7 +14,9 @@ import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
  * Created by Ruona Onobrakpeya on 12/23/20.
  */
 
-class SubredditListAdapter : androidx.recyclerview.widget.ListAdapter<Link, SubredditViewHolder>(DIFF_CALLBACK) {
+class SubredditListAdapter(
+    val clickHandler: (Link) -> Unit
+) : androidx.recyclerview.widget.ListAdapter<Link, SubredditViewHolder>(DIFF_CALLBACK) {
     companion object {
         val DIFF_CALLBACK : DiffUtil.ItemCallback<Link> by DiffCallbackDelegate()
     }
@@ -26,6 +28,9 @@ class SubredditListAdapter : androidx.recyclerview.widget.ListAdapter<Link, Subr
 
     override fun onBindViewHolder(holder: SubredditViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            clickHandler(getItem(position))
+        }
     }
 }
 

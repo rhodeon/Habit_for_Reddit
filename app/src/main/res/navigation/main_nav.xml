@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFeedFragment_to_commentsFragment"
             app:destination="@id/threadFragment" />
+        <action
+            android:id="@+id/action_homeFeedFragment_to_tabTestFragment"
+            app:destination="@id/tabTestFragment" />
     </fragment>
     <dialog
         android:id="@+id/menuBottomDialogFragment"
@@ -43,6 +46,9 @@
         <argument
             android:name="location"
             app:argType="string" />
+        <action
+            android:id="@+id/action_subredditFragment_to_threadFragment"
+            app:destination="@id/threadFragment" />
     </fragment>
     <fragment
         android:id="@+id/threadFragment"
@@ -53,4 +59,22 @@
             android:name="permalink"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/tabTestFragment"
+        android:name="com.rhodeon.habitforreddit.TabTestFragment"
+        android:label="TabTestFragment"
+        tools:layout="@layout/fragment_tab_test"/>
+    <fragment
+        android:id="@+id/postListFragment"
+        android:name="com.rhodeon.habitforreddit.ui.postList.PostListFragment"
+        android:label="PostListFragment"
+        tools:layout="@layout/fragment_post_list">
+        <argument
+            android:name="location"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_postListFragment_to_threadFragment2"
+            app:destination="@id/threadFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_threadFragment" app:destination="@id/threadFragment" />
 </navigation>
