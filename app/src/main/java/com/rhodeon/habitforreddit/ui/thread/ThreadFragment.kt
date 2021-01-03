@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.rhodeon.habitforreddit.databinding.FragmentThreadBinding
+import com.rhodeon.habitforreddit.extensions.collapse
 import com.rhodeon.habitforreddit.models.comment.CommentListing
 
 /**
@@ -20,7 +21,7 @@ class ThreadFragment : Fragment() {
     private val args: ThreadFragmentArgs by navArgs()
     private lateinit var factory: CommentsViewModelFactory
     private val viewModel: CommentsViewModel by viewModels(
-        factoryProducer = {factory}
+        factoryProducer = { factory }
     )
 
     private var _binding: FragmentThreadBinding? = null
@@ -35,7 +36,7 @@ class ThreadFragment : Fragment() {
         factory = CommentsViewModelFactory(args.permalink)
 
         _binding = FragmentThreadBinding.inflate(inflater, container, false)
-        return  binding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +51,7 @@ class ThreadFragment : Fragment() {
 
         val viewModelObserver = Observer<List<CommentListing>> { response ->
             adapter.submitList(response[1].data.children)
+            binding.progressBar.collapse()
         }
         viewModel.response.observe(viewLifecycleOwner, viewModelObserver)
     }

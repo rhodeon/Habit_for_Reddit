@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.rhodeon.habitforreddit.MainNavDirections
 import com.rhodeon.habitforreddit.databinding.FragmentPostListBinding
+import com.rhodeon.habitforreddit.extensions.collapse
 import com.rhodeon.habitforreddit.extensions.navigateSafe
 import com.rhodeon.habitforreddit.models.link.Link
 import com.rhodeon.habitforreddit.models.link.LinkListing
@@ -22,7 +23,7 @@ class PostListFragment : Fragment() {
     private val args: PostListFragmentArgs by navArgs()
     private lateinit var postListViewModelFactory: PostListViewModelFactory
     private val postListViewModel: PostListViewModel by viewModels(
-        factoryProducer = {postListViewModelFactory}
+        factoryProducer = { postListViewModelFactory }
     )
 
     private var _binding: FragmentPostListBinding? = null
@@ -41,13 +42,14 @@ class PostListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = PostListAdapter{
+        val adapter = PostListAdapter {
             navigateToComments(it)
         }
         binding.postRecyclerView.adapter = adapter
 
         val viewModelObserver = Observer<LinkListing> { response ->
             adapter.submitList(response.data.children)
+            binding.progressBar.collapse()
         }
         postListViewModel.response.observe(viewLifecycleOwner, viewModelObserver)
     }
