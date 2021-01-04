@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rhodeon.habitforreddit.databinding.ItemCommentBinding
 import com.rhodeon.habitforreddit.models.comment.Comment
 import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
+import io.noties.markwon.Markwon
 
 /**
  * Created by Ruona Onobrakpeya on 12/31/20.
  */
 
-class CommentsListAdapter : androidx.recyclerview.widget.ListAdapter<Comment, CommentsViewHolder>(
+class CommentsListAdapter: androidx.recyclerview.widget.ListAdapter<Comment, CommentsViewHolder>(
     DIFF_CALLBACK
 ) {
     companion object {
@@ -30,7 +31,13 @@ class CommentsListAdapter : androidx.recyclerview.widget.ListAdapter<Comment, Co
 }
 
 class CommentsViewHolder(private val binding: ItemCommentBinding) : RecyclerView.ViewHolder(binding.root) {
+    private val markwon = Markwon.create(binding.root.context)
     fun bind(comment: Comment) {
-        binding.commentBody.text = comment.data.rawBody
+//        binding.commentBody.text = comment.data.rawBody
+        val commentBody = comment.data.rawBody
+
+        if (!commentBody.isNullOrBlank()) {
+            markwon.setMarkdown(binding.commentBody, commentBody)
+        }
     }
 }
