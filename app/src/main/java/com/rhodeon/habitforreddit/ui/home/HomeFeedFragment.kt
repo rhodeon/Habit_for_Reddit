@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.rhodeon.habitforreddit.databinding.FragmentHomeFeedBinding
 import com.rhodeon.habitforreddit.extensions.navigateSafe
 import com.rhodeon.habitforreddit.ui.postList.PostListFragment
+import com.rhodeon.habitforreddit.ui.postList.PostListFragmentArgs
 
 /**
  * Created by Ruona Onobrakpeya on 12/23/20.
@@ -41,7 +42,6 @@ class HomeFeedFragment : Fragment() {
         TabLayoutMediator(binding.locationTab, binding.postPager) { tab, position ->
             tab.text = homeFeedViewModel.locationList[position]
         }.attach()
-
     }
 
     override fun onDestroy() {
@@ -59,9 +59,8 @@ class PostStateAdapter(fragment: Fragment, val viewModel: HomeFeedViewModel) : F
 
     override fun createFragment(position: Int): Fragment {
         val fragment = PostListFragment()
-        fragment.arguments = Bundle().apply {
-            putString("location", viewModel.locationList[position])
-        }
+        val args = PostListFragmentArgs(subreddit = viewModel.locationList[position])
+        fragment.arguments = args.toBundle()
         return fragment
     }
 }

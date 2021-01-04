@@ -34,7 +34,7 @@ class PostListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        postListViewModelFactory = PostListViewModelFactory(args.location)
+        postListViewModelFactory = PostListViewModelFactory(args.subreddit)
         _binding = FragmentPostListBinding.inflate(inflater, container, false)
         return binding.root
     }

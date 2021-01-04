@@ -17,24 +17,24 @@ import kotlinx.coroutines.withContext
  * Created by Ruona Onobrakpeya on 12/30/20.
  */
 
-class PostListViewModelFactory(private val location: String) :
+class PostListViewModelFactory(private val subreddit: String) :
     ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PostListViewModel::class.java)) {
-            return PostListViewModel(location) as T
+            return PostListViewModel(subreddit) as T
         }
         throw IllegalArgumentException("Unknown ViewModel Class")
     }
 }
 
-class PostListViewModel(val location: String) : ViewModel() {
+class PostListViewModel(val subreddit: String) : ViewModel() {
     private val _response = MutableLiveData<LinkListing>()
     val response: LiveData<LinkListing> = _response
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            updatePosts(location)
+            updatePosts(subreddit)
         }
     }
 

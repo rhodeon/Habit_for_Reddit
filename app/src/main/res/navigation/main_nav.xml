@@ -62,7 +62,7 @@
         android:label="PostListFragment"
         tools:layout="@layout/fragment_post_list">
         <argument
-            android:name="location"
+            android:name="subreddit"
             app:argType="string" />
         <action
             android:id="@+id/action_postListFragment_to_threadFragment2"

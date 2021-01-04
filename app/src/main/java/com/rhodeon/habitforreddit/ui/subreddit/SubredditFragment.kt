@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.rhodeon.habitforreddit.databinding.FragmentSubredditBinding
 import com.rhodeon.habitforreddit.ui.postList.PostListFragment
+import com.rhodeon.habitforreddit.ui.postList.PostListFragmentArgs
 
 /**
  * Created by Ruona Onobrakpeya on 12/30/20.
@@ -62,14 +63,13 @@ class SubredditFragment : Fragment() {
     }
 }
 
-class SubredditStateAdapter(fragment: Fragment, val location: String) : FragmentStateAdapter(fragment) {
+class SubredditStateAdapter(fragment: Fragment, private val location: String) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 1
 
     override fun createFragment(position: Int): Fragment {
         val fragment = PostListFragment()
-        fragment.arguments = Bundle().apply {
-            putString("location", location)
-        }
+        val args = PostListFragmentArgs(subreddit = location)
+        fragment.arguments = args.toBundle()
         return fragment
     }
 }
