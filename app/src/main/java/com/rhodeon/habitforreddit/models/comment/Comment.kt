@@ -1,6 +1,6 @@
 package com.rhodeon.habitforreddit.models.comment
 
-import com.squareup.moshi.Json
+import com.squareup.moshi.*
 
 /**
  * Created by Ruona Onobrakpeya on 12/23/20.
@@ -12,7 +12,7 @@ data class Comment(
     @field:Json(name = "data") val data: CommentData
 )
 
-data class CommentData (
+data class CommentData(
     @field:Json(name = "author") val author: String,
     @field:Json(name = "author_flair_css_class") val authorFlairCss: String,
     @field:Json(name = "author_flair_text") val authorFlair: String,
@@ -24,7 +24,8 @@ data class CommentData (
     @field:Json(name = "link_title") val linkTitle: String,
     @field:Json(name = "link_url") val linkUrl: String,
     @field:Json(name = "parent_id") val parentId: String,
-    @field:Json(name = "replies") val replies: Any,
+    @field:Json(name = "depth") val depth: Int,
+    @field:Json(name = "replies") var replies: Any?, // Should be a CommentListing?, but Reddit just had to send an empty string for no replies.
     @field:Json(name = "saved") val isSaved: Boolean,
     @field:Json(name = "score") val score: Int,
     @field:Json(name = "score_hidden") val isScoreHidden: Boolean,
@@ -33,7 +34,7 @@ data class CommentData (
     @field:Json(name = "distinguished") val distinguished: String?,
 
     // Implemented from Created
-    @field:Json(name = "created")val creationTimeLocal: Long,
+    @field:Json(name = "created") val creationTimeLocal: Long,
     @field:Json(name = "created_utc") val creationTimeUtc: Long,
 
     // Implemented from Votable

@@ -7,21 +7,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rhodeon.habitforreddit.databinding.ItemCommentBinding
 import com.rhodeon.habitforreddit.models.comment.Comment
 import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
-import io.noties.markwon.Markwon
+import com.rhodeon.habitforreddit.views.comment.CommentAdapter
 
 /**
  * Created by Ruona Onobrakpeya on 12/31/20.
  */
 
-class CommentsListAdapter: androidx.recyclerview.widget.ListAdapter<Comment, CommentsViewHolder>(
+class CommentsListAdapter : androidx.recyclerview.widget.ListAdapter<Comment, CommentsViewHolder>(
     DIFF_CALLBACK
 ) {
     companion object {
-        val DIFF_CALLBACK : DiffUtil.ItemCallback<Comment> by DiffCallbackDelegate()
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<Comment> by DiffCallbackDelegate()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
-        val binding = ItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CommentsViewHolder(binding)
     }
 
@@ -30,14 +31,17 @@ class CommentsListAdapter: androidx.recyclerview.widget.ListAdapter<Comment, Com
     }
 }
 
-class CommentsViewHolder(private val binding: ItemCommentBinding) : RecyclerView.ViewHolder(binding.root) {
-    private val markwon = Markwon.create(binding.root.context)
+class CommentsViewHolder(private val binding: ItemCommentBinding) :
+    RecyclerView.ViewHolder(binding.root) {
     fun bind(comment: Comment) {
-//        binding.commentBody.text = comment.data.rawBody
-        val commentBody = comment.data.rawBody
-
-        if (!commentBody.isNullOrBlank()) {
-            markwon.setMarkdown(binding.commentBody, commentBody)
+        if (!comment.data.rawBody.isNullOrBlank()) {
+            val commentAdapter = CommentAdapter(
+                comment,
+                binding.commentLayout,
+                binding.commentLayout.context
+            )
+            commentAdapter.bind()
         }
     }
 }
+
