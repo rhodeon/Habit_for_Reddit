@@ -1,8 +1,9 @@
 package com.rhodeon.habitforreddit.views.comment
 
-import android.annotation.SuppressLint
 import android.content.Context
+import com.rhodeon.habitforreddit.extensions.collapse
 import com.rhodeon.habitforreddit.models.comment.Comment
+import com.rhodeon.habitforreddit.models.comment.CommentData
 import com.rhodeon.habitforreddit.utils.commentListingFromJson
 import com.rhodeon.habitforreddit.utils.mapToJson
 
@@ -14,33 +15,51 @@ import com.rhodeon.habitforreddit.utils.mapToJson
 /**
  * Adapts a comment response to a comment view
  */
-class CommentAdapter(val comment: Comment, val commentLayout: CommentLayout, val context: Context) {
-    @SuppressLint("ResourceType")
-    fun bind() {
-        commentLayout.depth = comment.data.depth
-        commentLayout.setComment(comment.data.rawBody)
+class CommentAdapter(val comment: Comment, private val commentLayout: CommentLayout, private val context: Context) {
+    init {
+        bind(comment, commentLayout, context)
+    }
 
-        // Handle replies
-        val repliesResponse = comment.data.replies
-        if (repliesResponse == "") return   // No replies
+    private fun bind(comment: Comment, commentLayout: CommentLayout, context: Context) {
+        val commentData = comment.data
+        commentLayout.depth = commentData.depth
 
-        // A JSON middleman is needed to convert the repliesResponse to a CommentListing
-        val repliesJson = mapToJson(repliesResponse as Map<*, *>)
-        val repliesListing = commentListingFromJson(repliesJson)
-        val replies: List<Comment> =
-            repliesListing.data.children   // Final list of replies as Comments
+        setIndentColour(commentData, commentLayout)
 
-        for ((rank, reply) in replies.withIndex()) {
-            val replyLayout = CommentLayout(context, commentLayout.attributeSet)
-            replyLayout.id = rank //rank
-            commentLayout.binding.innerLayout.addView(replyLayout)
-            commentLayout.replies += 1
+        // TODO: Use enums for kinds
+        if (comment.kind == "t1") { // Reply is a comment, not "more".
+            commentLayout.setComment(comment.data.rawBody)
 
-            // TODO: Use enums for kinds
-            if (reply.kind == "t1") {   // Reply is a comment, not "more".
-                commentLayout.binding.innerLayout.findViewById<CommentLayout>(replyLayout.id)
-                    .setComment(reply.data.rawBody)
+            // Handle replies response
+            val repliesResponse = comment.data.replies
+            if (repliesResponse == "") return   // No replies
+
+            // A JSON middleman is needed to convert the repliesResponse to a CommentListing
+            val repliesJson = mapToJson(repliesResponse as Map<*, *>)
+            val repliesListing = commentListingFromJson(repliesJson)
+            val replies: List<Comment> =
+                repliesListing.data.children   // Final list of replies as Comments
+
+            // Bind replies to nested comment layouts
+            for ((rank, reply) in replies.withIndex()) {
+                commentLayout.replies += 1
+
+                val replyLayout = CommentLayout(context, commentLayout.attributeSet)
+                replyLayout.id = rank //rank
+                commentLayout.binding.innerLayout.addView(replyLayout)
+
+                bind(reply, replyLayout, context)
             }
+        }
+    }
+
+    private fun setIndentColour(commentData: CommentData, commentLayout: CommentLayout) {
+        if (commentData.depth == 0) {   // Remove indent line for top level comments
+            commentLayout.binding.indentLine.collapse()
+        }
+        else {
+            val indentColour = CommentIndentColour.values()[(commentData.depth - 1) % 6].color
+            commentLayout.binding.indentLine.setBackgroundColor(indentColour)
         }
     }
 }

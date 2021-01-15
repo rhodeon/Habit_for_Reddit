@@ -40,7 +40,6 @@ class CommentsViewHolder(private val binding: ItemCommentBinding) :
                 binding.commentLayout,
                 binding.commentLayout.context
             )
-            commentAdapter.bind()
         }
     }
 }
