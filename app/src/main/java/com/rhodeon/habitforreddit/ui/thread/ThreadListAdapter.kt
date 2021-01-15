@@ -8,6 +8,7 @@ import com.rhodeon.habitforreddit.databinding.ItemCommentBinding
 import com.rhodeon.habitforreddit.models.comment.Comment
 import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
 import com.rhodeon.habitforreddit.views.comment.CommentAdapter
+import kotlinx.android.synthetic.main.view_comment.view.*
 
 /**
  * Created by Ruona Onobrakpeya on 12/31/20.
@@ -27,11 +28,18 @@ class CommentsListAdapter : androidx.recyclerview.widget.ListAdapter<Comment, Co
     }
 
     override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
+        // Prevent the accumulation of inflated/added replies from recycled views by removing the reply views.
+        val innerLayout = holder.binding.commentLayout.innerLayout
+
+        if (innerLayout.childCount > 1) {   // The first view hosts the parent comment so it isn't removed
+            innerLayout.removeViews(1, innerLayout.childCount - 1)
+        }
+
         holder.bind(getItem(position))
     }
 }
 
-class CommentsViewHolder(private val binding: ItemCommentBinding) :
+class CommentsViewHolder(val binding: ItemCommentBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(comment: Comment) {
         if (!comment.data.rawBody.isNullOrBlank()) {
