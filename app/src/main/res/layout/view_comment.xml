@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:orientation="horizontal">
 
     <View
         android:id="@+id/indentLine"
@@ -43,6 +43,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
                 app:layout_constraintBottom_toBottomOf="@+id/author"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -74,6 +75,7 @@
                 android:id="@+id/commentScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
                 app:layout_constraintBottom_toBottomOf="@+id/upvote"
                 app:layout_constraintStart_toEndOf="@+id/upvote"
                 app:layout_constraintTop_toTopOf="@+id/upvote"
@@ -87,9 +89,6 @@
                 app:layout_constraintStart_toEndOf="@+id/commentScore"
                 app:layout_constraintTop_toTopOf="@+id/upvote"
                 app:srcCompat="@drawable/ic_downvote_arrow" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
-
 </LinearLayout>

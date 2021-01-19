@@ -71,7 +71,6 @@ class CommentAdapter(val comment: Comment, private val commentLayout: CommentLay
             commentScore.text = commentData.score.toString()
             author.text = commentData.author
             timestamp.text = formatDate(commentData.creationTimeUtc)
-
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.rhodeon.habitforreddit.utils
 
+import android.icu.text.TimeZoneFormat
 import java.text.DateFormat
 import java.util.*
 
@@ -8,5 +9,5 @@ import java.util.*
  */
 
 fun formatDate(date: Long): String {
-    return DateFormat.getDateInstance().format(Date(date * 1000))
+    return DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT).format(Date(date * 1000))
 }
