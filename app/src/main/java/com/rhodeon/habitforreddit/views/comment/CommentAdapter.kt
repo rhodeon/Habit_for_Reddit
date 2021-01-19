@@ -5,6 +5,7 @@ import com.rhodeon.habitforreddit.extensions.collapse
 import com.rhodeon.habitforreddit.models.comment.Comment
 import com.rhodeon.habitforreddit.models.comment.CommentData
 import com.rhodeon.habitforreddit.utils.commentListingFromJson
+import com.rhodeon.habitforreddit.utils.formatDate
 import com.rhodeon.habitforreddit.utils.mapToJson
 
 /**
@@ -28,7 +29,7 @@ class CommentAdapter(val comment: Comment, private val commentLayout: CommentLay
 
         // TODO: Use enums for kinds
         if (comment.kind == "t1") { // Reply is a comment, not "more".
-            commentLayout.setComment(comment.data.rawBody)
+            setData(commentData, commentLayout)
 
             // Handle replies response
             val repliesResponse = comment.data.replies
@@ -60,6 +61,17 @@ class CommentAdapter(val comment: Comment, private val commentLayout: CommentLay
         else {
             val indentColour = CommentIndentColour.values()[(commentData.depth - 1) % 6].color
             commentLayout.binding.indentLine.setBackgroundColor(indentColour)
+        }
+    }
+
+    private fun setData(commentData: CommentData, commentLayout: CommentLayout) {
+        commentLayout.setComment(commentData.rawBody)
+
+        commentLayout.binding.apply {
+            commentScore.text = commentData.score.toString()
+            author.text = commentData.author
+            timestamp.text = formatDate(commentData.creationTimeUtc)
+
         }
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,7 +10,7 @@
 
     <View
         android:id="@+id/indentLine"
-        android:layout_width="1dp"
+        android:layout_width="2dp"
         android:layout_height="match_parent"
         android:background="?android:attr/listDivider" />
 
@@ -19,12 +20,75 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/commentBody"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            tools:text="The quick brown fox jumps over the lazy dog." />
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="rhodeon" />
+
+            <TextView
+                android:id="@+id/timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/author"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/author"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2020" />
+
+            <TextView
+                android:id="@+id/commentBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/author"
+                app:layout_constraintTop_toBottomOf="@+id/author"
+                tools:text="The quick brown fox jumps over the lazy dog." />
+
+            <ImageView
+                android:id="@+id/upvote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/commentBody"
+                app:layout_constraintTop_toBottomOf="@+id/commentBody"
+                app:srcCompat="@drawable/ic_upvote_arrow" />
+
+            <TextView
+                android:id="@+id/commentScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/upvote"
+                app:layout_constraintStart_toEndOf="@+id/upvote"
+                app:layout_constraintTop_toTopOf="@+id/upvote"
+                tools:text="200" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/upvote"
+                app:layout_constraintStart_toEndOf="@+id/commentScore"
+                app:layout_constraintTop_toTopOf="@+id/upvote"
+                app:srcCompat="@drawable/ic_downvote_arrow" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

@@ -38,7 +38,7 @@ class HomeViewHolder(private val binding: ItemPostHeaderBinding) : RecyclerView.
     fun bind(link: Link) {
         link.data.apply {
             binding.title.text = title
-            binding.username.text = author
+            binding.author.text = author
             binding.subreddit.text = subreddit
             binding.karma.text = score.toString()
 
