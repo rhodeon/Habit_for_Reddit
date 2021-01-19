@@ -7,4 +7,6 @@
     <string name="open_reddit_link">Open Reddit Link</string>
     <string name="guest">Guest</string>
     <string name="search">Search</string>
+    <string name="upvote_comment">Upvote comment.</string>
+    <string name="downvote_comment">Downvote comment.</string>
 </resources>
