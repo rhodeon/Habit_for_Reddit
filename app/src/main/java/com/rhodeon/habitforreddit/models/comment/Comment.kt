@@ -45,5 +45,8 @@ data class CommentData(
     // For mods
     @field:Json(name = "approved_by") val approvedBy: String?,
     @field:Json(name = "banned_by") val bannedBy: String?,
-    @field:Json(name = "num_reports") val reportCount: Int?
+    @field:Json(name = "num_reports") val reportCount: Int?,
+
+    // For "more replies" listings
+    @field:Json(name = "count") val replyCount: Int?
 )

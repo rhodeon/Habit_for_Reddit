@@ -52,6 +52,19 @@ class CommentAdapter(val comment: Comment, private val commentLayout: CommentLay
                 bind(reply, replyLayout, context)
             }
         }
+
+        else if (comment.kind == "more") {
+            val replyCount = commentData.replyCount
+
+            commentLayout.binding.apply {
+                commentBody.text = "load $replyCount more comment(s)"
+                author.collapse()
+                timestamp.collapse()
+                upvoteButton.collapse()
+                commentScore.collapse()
+                downvoteButton.collapse()
+            }
+        }
     }
 
     private fun setIndentColour(commentData: CommentData, commentLayout: CommentLayout) {
