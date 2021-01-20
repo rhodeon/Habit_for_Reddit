@@ -55,6 +55,9 @@
         <argument
             android:name="permalink"
             app:argType="string" />
+        <argument
+            android:name="post"
+            app:argType="com.rhodeon.habitforreddit.models.link.LinkData" />
     </fragment>
     <fragment
         android:id="@+id/postListFragment"

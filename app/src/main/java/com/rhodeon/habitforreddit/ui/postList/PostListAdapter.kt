@@ -2,14 +2,13 @@ package com.rhodeon.habitforreddit.ui.postList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isGone
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.rhodeon.habitforreddit.databinding.ItemPostHeaderBinding
 import com.rhodeon.habitforreddit.models.link.Link
 import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
+import com.rhodeon.habitforreddit.utils.bindPostHeader
 
 /**
  * Created by Ruona Onobrakpeya on 1/3/21.
@@ -36,16 +35,6 @@ class PostListAdapter(
 
 class PostListViewHolder(private val binding: ItemPostHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(link: Link) {
-        link.data.apply {
-            binding.title.text = title
-            binding.author.text = author
-            binding.subreddit.text = subreddit
-            binding.karma.text = score.toString()
-
-            when (thumbnail) {
-                "self", "image", "default" -> binding.thumbnail.isGone = true
-                else -> binding.thumbnail.load(thumbnail)
-            }
-        }
+        bindPostHeader(link.data, binding)
     }
 }

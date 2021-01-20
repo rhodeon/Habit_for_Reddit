@@ -61,7 +61,8 @@ class PostListFragment : Fragment() {
 
     private fun navigateToComments(link: Link) {
         val action = MainNavDirections.actionGlobalThreadFragment(
-            permalink = link.data.permalink
+            permalink = link.data.permalink,
+            post = link.data
         )
         navigateSafe(action)
     }

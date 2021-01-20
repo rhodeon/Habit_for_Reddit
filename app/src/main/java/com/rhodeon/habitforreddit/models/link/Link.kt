@@ -1,6 +1,9 @@
 package com.rhodeon.habitforreddit.models.link
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 /**
  * Created by Ruona Onobrakpeya on 12/23/20.
@@ -12,6 +15,7 @@ data class Link(
     @field:Json(name = "data") val data: LinkData
 )
 
+@Parcelize
 data class LinkData(
     @field:Json(name = "author") val author: String?,
     @field:Json(name = "author_flair_css_class") val authorFlairCss: String,
@@ -33,7 +37,7 @@ data class LinkData(
     @field:Json(name = "subreddit_id") val subredditId: String,
     @field:Json(name = "title") val title: String,
     @field:Json(name = "url") val url: String,
-    @field:Json(name = "edited") val edited: Any,
+    @field:Json(name = "edited") val edited: @RawValue Any,
     @field:Json(name = "distinguished") val distinguished: String?,
     @field:Json(name = "stickied") val isStickied: Boolean,
 
@@ -48,7 +52,7 @@ data class LinkData(
 
     // Media
     // TODO: Handle media objects.
-    @field:Json(name = "media") val media: Any?,
-    @field:Json(name = "media_embed") val mediaEmbed: Any,
+    @field:Json(name = "media") val media: @RawValue Any?,
+    @field:Json(name = "media_embed") val mediaEmbed: @RawValue Any,
     @field:Json(name = "thumbnail") val thumbnail: String
-)
+) : Parcelable

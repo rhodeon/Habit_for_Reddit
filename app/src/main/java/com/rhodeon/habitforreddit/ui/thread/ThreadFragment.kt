@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
 import com.rhodeon.habitforreddit.databinding.FragmentThreadBinding
 import com.rhodeon.habitforreddit.extensions.collapse
 import com.rhodeon.habitforreddit.models.comment.CommentListing
+import com.rhodeon.habitforreddit.utils.bindPostHeader
 
 /**
  * Created by Ruona Onobrakpeya on 12/31/20.
@@ -48,6 +51,8 @@ class ThreadFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        bindHeader()
+
         val adapter = CommentsListAdapter()
         binding.commentRecyclerView.adapter = adapter
         binding.commentRecyclerView.setItemViewCacheSize(50)
@@ -59,14 +64,12 @@ class ThreadFragment : Fragment() {
         viewModel.response.observe(viewLifecycleOwner, viewModelObserver)
     }
 
+    private fun bindHeader() {
+        bindPostHeader(args.post, binding.header)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-}
-
-class CustomManager(context: Context) : LinearLayoutManager(context) {
-    override fun setInitialPrefetchItemCount(itemCount: Int) {
-        super.setInitialPrefetchItemCount(50)
     }
 }
