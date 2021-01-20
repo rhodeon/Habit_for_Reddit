@@ -72,11 +72,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:contentDescription="@string/upvote_comment"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/commentBody"
+                app:layout_constraintEnd_toStartOf="@+id/commentScore"
                 app:layout_constraintTop_toBottomOf="@+id/commentBody"
-                app:srcCompat="@drawable/ic_upvote_arrow"
-                android:contentDescription="@string/upvote_comment" />
+                app:srcCompat="@drawable/ic_upvote_arrow" />
 
             <TextView
                 android:id="@+id/commentScore"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
                 app:layout_constraintBottom_toBottomOf="@+id/upvoteButton"
-                app:layout_constraintStart_toEndOf="@+id/upvoteButton"
+                app:layout_constraintEnd_toStartOf="@+id/downvoteButton"
                 app:layout_constraintTop_toTopOf="@+id/upvoteButton"
                 tools:text="200" />
 
@@ -92,11 +92,12 @@
                 android:id="@+id/downvoteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/downvote_comment"
                 app:layout_constraintBottom_toBottomOf="@+id/upvoteButton"
-                app:layout_constraintStart_toEndOf="@+id/commentScore"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/upvoteButton"
-                app:srcCompat="@drawable/ic_downvote_arrow"
-                android:contentDescription="@string/downvote_comment" />
+                app:srcCompat="@drawable/ic_downvote_arrow" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </LinearLayout>
