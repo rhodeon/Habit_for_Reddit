@@ -31,13 +31,22 @@ class SubredditRequests(private val token: String) {
     interface Subreddit {
         @GET
         suspend fun getPosts(
-            @Url() url: String,
+            @Url url: String,
             @Query("limit") limit: Int
         ): Response<LinkListing>
 
         @GET
         suspend fun getComments(
-            @Url() url: String
+            @Url url: String
+        ): Response<List<CommentListing>>
+
+        @GET("/api/morechildren")
+        suspend fun moreComments(
+            @Query("api_type") apiType: String = "json",
+            @Query("children") children: List<String>,
+            @Query("link_id") link: String,
+            @Query("limit_children") limitChildren: Boolean = true,
+            @Query("sort") sort: String = "top"
         ): Response<List<CommentListing>>
     }
 }
