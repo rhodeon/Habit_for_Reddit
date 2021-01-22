@@ -3,6 +3,7 @@ package com.rhodeon.habitforreddit.utils
 import coil.load
 import com.rhodeon.habitforreddit.databinding.ItemPostHeaderBinding
 import com.rhodeon.habitforreddit.extensions.collapse
+import com.rhodeon.habitforreddit.extensions.show
 import com.rhodeon.habitforreddit.models.link.LinkData
 
 /**
@@ -21,7 +22,10 @@ fun bindPostHeader(postData: LinkData, binding: ItemPostHeaderBinding) {
 
         when (postData.thumbnail) {
             "self", "image", "default" -> thumbnail.collapse()
-            else -> thumbnail.load(postData.thumbnail)
+            else -> {
+                thumbnail.show()
+                thumbnail.load(postData.thumbnail)
+            }
         }
     }
 }
