@@ -48,8 +48,7 @@ class PostListViewModel(val subreddit: String) : ViewModel() {
         return withContext(Dispatchers.IO) {
             try {
                 val response = SubredditRequests(SessionManager.token).oAuthService2().getPosts(
-                    url = "/r/$location/",
-                    limit = 19
+                    url = "/r/$location/"
                 )
                 val postResponse: LinkListing? = response.body()
 

@@ -56,7 +56,7 @@ ext {
     coil_version = "1.1.0"
     viewpager2_version = "1.0.0"
     markwon_version = "4.6.1"
-
+    coord_layout_version = "1.1.0"
 }
 
 dependencies {
@@ -76,6 +76,9 @@ dependencies {
     // Navigation Components
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    // CoordinatorLayout
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$coord_layout_version"
 
     // Architecture Components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel_version"

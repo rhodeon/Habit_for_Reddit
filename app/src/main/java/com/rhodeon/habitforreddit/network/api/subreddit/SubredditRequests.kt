@@ -31,8 +31,7 @@ class SubredditRequests(private val token: String) {
     interface Subreddit {
         @GET
         suspend fun getPosts(
-            @Url url: String,
-            @Query("limit") limit: Int
+            @Url url: String
         ): Response<LinkListing>
 
         @GET
