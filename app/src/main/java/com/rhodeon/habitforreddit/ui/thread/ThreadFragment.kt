@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.rhodeon.habitforreddit.databinding.FragmentThreadBinding
 import com.rhodeon.habitforreddit.extensions.collapse
+import com.rhodeon.habitforreddit.extensions.show
 import com.rhodeon.habitforreddit.models.comment.CommentListing
 import com.rhodeon.habitforreddit.utils.bindPostHeader
 import io.noties.markwon.Markwon
@@ -48,11 +49,10 @@ class ThreadFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        bindHeader()
+        bindPostData()
 
         val adapter = CommentsListAdapter()
         binding.commentRecyclerView.adapter = adapter
-//        binding.commentRecyclerView.setItemViewCacheSize(50)
 
         val viewModelObserver = Observer<List<CommentListing>> { response ->
             adapter.submitList(response[1].data.children)
@@ -61,15 +61,22 @@ class ThreadFragment : Fragment() {
         viewModel.response.observe(viewLifecycleOwner, viewModelObserver)
     }
 
-    private fun bindHeader() {
-        bindPostHeader(args.post, binding.header)
-
-        val markwon = Markwon.create(requireContext())
-        markwon.setMarkdown(binding.selftext, args.post.selftext)
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    /**
+     * Sets the data to display for the OP post header and selftext
+     */
+    private fun bindPostData() {
+        val post = args.post
+        bindPostHeader(post, binding.header)
+
+        if (post.selftext.isNotBlank()) {
+            binding.selftextLayout.show()
+            val markwon = Markwon.create(requireContext())
+            markwon.setMarkdown(binding.selftext, post.selftext)
+        }
     }
 }
