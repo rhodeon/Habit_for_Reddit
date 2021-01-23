@@ -32,7 +32,7 @@ data class LinkData(
     @field:Json(name = "permalink") val permalink: String,
     @field:Json(name = "saved") val isSaved: Boolean,
     @field:Json(name = "score") val score: Int,
-    @field:Json(name = "selftext") val rawBody: String,
+    @field:Json(name = "selftext") val selftext: String,
     @field:Json(name = "subreddit") val subreddit: String,
     @field:Json(name = "subreddit_id") val subredditId: String,
     @field:Json(name = "title") val title: String,

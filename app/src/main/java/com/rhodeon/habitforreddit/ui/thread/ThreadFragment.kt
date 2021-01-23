@@ -65,7 +65,7 @@ class ThreadFragment : Fragment() {
         bindPostHeader(args.post, binding.header)
 
         val markwon = Markwon.create(requireContext())
-        markwon.setMarkdown(binding.selftext, args.post.rawBody)
+        markwon.setMarkdown(binding.selftext, args.post.selftext)
     }
 
     override fun onDestroy() {
