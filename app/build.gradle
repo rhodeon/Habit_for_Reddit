@@ -57,6 +57,7 @@ ext {
     viewpager2_version = "1.0.0"
     markwon_version = "4.6.1"
     coord_layout_version = "1.1.0"
+    paging3_version = "3.0.0-alpha12"
 }
 
 dependencies {
@@ -90,7 +91,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
-    // Coroutine
+    // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
 
     // Coil
@@ -106,4 +107,7 @@ dependencies {
     implementation "io.noties.markwon:linkify:$markwon_version"
     implementation "io.noties.markwon:recycler:$markwon_version"
     implementation "io.noties.markwon:syntax-highlight:$markwon_version"
+
+    // Paging
+    implementation "androidx.paging:paging-runtime-ktx:$paging3_version"
 }

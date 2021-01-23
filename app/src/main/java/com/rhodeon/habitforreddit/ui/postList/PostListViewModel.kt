@@ -1,17 +1,12 @@
 package com.rhodeon.habitforreddit.ui.postList
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.rhodeon.habitforreddit.models.link.LinkListing
-import com.rhodeon.habitforreddit.network.api.subreddit.SubredditRequests
-import com.rhodeon.habitforreddit.utils.SessionManager
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.rhodeon.habitforreddit.models.link.Link
 
 /**
  * Created by Ruona Onobrakpeya on 12/30/20.
@@ -29,45 +24,9 @@ class PostListViewModelFactory(private val subreddit: String) :
 }
 
 class PostListViewModel(val subreddit: String) : ViewModel() {
-    private val _response = MutableLiveData<LinkListing>()
-    val response: LiveData<LinkListing> = _response
+    val posts: LiveData<PagingData<Link>> = fetchPosts(subreddit)
 
-    init {
-        CoroutineScope(Dispatchers.IO).launch {
-            updatePosts(subreddit)
-        }
-    }
-
-    suspend fun updatePosts(location: String) {
-        withContext(Dispatchers.IO) {
-            _response.postValue(loadPosts(location))
-        }
-    }
-
-    private suspend fun loadPosts(location: String): LinkListing? {
-        return withContext(Dispatchers.IO) {
-            try {
-                val response = SubredditRequests(SessionManager.token).oAuthService2().getPosts(
-                    url = "/r/$location/"
-                )
-                val postResponse: LinkListing? = response.body()
-
-                if (postResponse != null) {
-                    postResponse
-                }
-                else {
-                    Log.e(
-                        "PostListViewModel",
-                        "code: ${response.code()} message:${response.message()}"
-                    )
-                    Log.e("PostListViewModel", "${response.headers()}")
-                    null
-                }
-            }
-            catch (e: Exception) {
-                Log.e("PostListViewModel", "Error Retrieving Posts: $e")
-                null
-            }
-        }
+    private fun fetchPosts(location: String): LiveData<PagingData<Link>> {
+        return PostListRepository(location).postListLiveData().cachedIn(viewModelScope)
     }
 }

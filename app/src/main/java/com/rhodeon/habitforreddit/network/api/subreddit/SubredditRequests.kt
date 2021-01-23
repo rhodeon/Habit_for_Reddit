@@ -3,6 +3,7 @@ package com.rhodeon.habitforreddit.network.api.subreddit
 import com.rhodeon.habitforreddit.models.comment.CommentListing
 import com.rhodeon.habitforreddit.models.link.LinkListing
 import com.rhodeon.habitforreddit.network.api.BearerInterceptor
+import com.rhodeon.habitforreddit.utils.DEFAULT_LISTING_LIMIT
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -31,7 +32,10 @@ class SubredditRequests(private val token: String) {
     interface Subreddit {
         @GET
         suspend fun getPosts(
-            @Url url: String
+            @Url url: String,
+            @Query("limit") limit: Int = DEFAULT_LISTING_LIMIT,
+            @Query("before") before: String? = null,
+            @Query("after") after: String? = null
         ): Response<LinkListing>
 
         @GET

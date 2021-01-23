@@ -2,8 +2,8 @@ package com.rhodeon.habitforreddit.ui.postList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rhodeon.habitforreddit.databinding.ItemPostHeaderBinding
 import com.rhodeon.habitforreddit.models.link.Link
@@ -16,7 +16,7 @@ import com.rhodeon.habitforreddit.utils.bindPostHeader
 
 class PostListAdapter(
     val clickHandler: (Link) -> Unit
-) : ListAdapter<Link, PostListViewHolder>(DIFF_CALLBACK) {
+) : PagingDataAdapter<Link, PostListViewHolder>(DIFF_CALLBACK) {
     companion object {
         val DIFF_CALLBACK : DiffUtil.ItemCallback<Link> by DiffCallbackDelegate()
     }
@@ -26,9 +26,11 @@ class PostListAdapter(
     }
 
     override fun onBindViewHolder(holder: PostListViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val currentItem = getItem(position)!!   // non-null because enablePlaceholders for the PagingConfig is false
+
+        holder.bind(currentItem)
         holder.itemView.setOnClickListener {
-            clickHandler(getItem(position))
+            clickHandler(currentItem)
         }
     }
 }
