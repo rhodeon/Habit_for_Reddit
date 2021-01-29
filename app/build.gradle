@@ -8,7 +8,7 @@ keyProperties.load(new FileInputStream(rootProject.file("keys.properties")))
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.1"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.rhodeon.habitforreddit"
@@ -51,7 +51,7 @@ ext {
     material_version = "1.2.1"
     retrofit_version = "2.9.0"
     coroutine_version = "1.4.0"
-    navigation_version = "2.3.2"
+    navigation_version = "2.3.3"
     viewmodel_version = "2.2.0"
     coil_version = "1.1.0"
     viewpager2_version = "1.0.0"
@@ -67,7 +67,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
