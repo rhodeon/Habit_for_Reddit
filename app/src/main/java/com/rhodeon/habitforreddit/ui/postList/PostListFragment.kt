@@ -32,6 +32,8 @@ class PostListFragment : Fragment() {
     private var _binding: FragmentPostListBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var adapter: PostListAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,7 +47,17 @@ class PostListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = PostListAdapter {
+        setUpAdapter()
+        setUpObserver()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    private fun setUpAdapter() {
+        adapter = PostListAdapter {
             navigateToComments(it)
         }
         adapter.addLoadStateListener {
@@ -56,18 +68,15 @@ class PostListFragment : Fragment() {
         }
 
         binding.postRecyclerView.adapter = adapter
+    }
 
+    private fun setUpObserver() {
         val viewModelObserver = Observer<PagingData<Link>> {
             lifecycleScope.launch {
                 adapter.submitData(it)
             }
         }
         postListViewModel.posts.observe(viewLifecycleOwner, viewModelObserver)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     private fun navigateToComments(link: Link) {
