@@ -67,7 +67,8 @@ class PostListFragment : Fragment() {
             }
         }
 
-        binding.postRecyclerView.adapter = adapter
+        val postListLoadStateAdapter = PostListLoadStateAdapter()
+        binding.postRecyclerView.adapter = adapter.withLoadStateFooter(postListLoadStateAdapter)
     }
 
     private fun setUpObserver() {
