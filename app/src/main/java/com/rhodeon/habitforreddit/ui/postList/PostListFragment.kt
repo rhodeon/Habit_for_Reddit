@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import com.rhodeon.habitforreddit.MainNavDirections
 import com.rhodeon.habitforreddit.databinding.FragmentPostListBinding
@@ -47,13 +48,19 @@ class PostListFragment : Fragment() {
         val adapter = PostListAdapter {
             navigateToComments(it)
         }
+        adapter.addLoadStateListener {
+            // Collapse progress bar on initial loading
+            if (it.append is LoadState.Loading) {
+                binding.progressBar.collapse()
+            }
+        }
+
         binding.postRecyclerView.adapter = adapter
 
         val viewModelObserver = Observer<PagingData<Link>> {
             lifecycleScope.launch {
                 adapter.submitData(it)
             }
-            binding.progressBar.collapse()
         }
         postListViewModel.posts.observe(viewLifecycleOwner, viewModelObserver)
     }
@@ -71,3 +78,4 @@ class PostListFragment : Fragment() {
         navigateSafe(action)
     }
 }
+
