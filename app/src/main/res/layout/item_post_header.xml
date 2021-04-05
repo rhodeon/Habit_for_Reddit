@@ -43,11 +43,15 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:textColor="@color/link"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/thumbnail"
             app:layout_constraintVertical_bias="1.0"
-            tools:text="r/anime" />
+            tools:text="r/anime"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/author"

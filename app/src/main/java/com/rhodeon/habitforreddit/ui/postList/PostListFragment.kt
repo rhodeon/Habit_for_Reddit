@@ -16,6 +16,7 @@ import com.rhodeon.habitforreddit.databinding.FragmentPostListBinding
 import com.rhodeon.habitforreddit.extensions.collapse
 import com.rhodeon.habitforreddit.extensions.navigateSafe
 import com.rhodeon.habitforreddit.models.link.Link
+import com.rhodeon.habitforreddit.models.subreddit.Subreddit
 import kotlinx.coroutines.launch
 
 /**
@@ -57,9 +58,11 @@ class PostListFragment : Fragment() {
     }
 
     private fun setUpAdapter() {
-        adapter = PostListAdapter {
-            navigateToComments(it)
-        }
+        adapter = PostListAdapter(
+            { navigateToComments(it) },
+            { navigateToSubreddit(it) }
+        )
+
         adapter.addLoadStateListener {
             // Collapse progress bar on initial loading
             if (it.append is LoadState.Loading) {
@@ -84,6 +87,14 @@ class PostListFragment : Fragment() {
         val action = MainNavDirections.actionGlobalThreadFragment(
             permalink = link.data.permalink,
             post = link.data
+        )
+        navigateSafe(action)
+    }
+
+    private fun navigateToSubreddit(subreddit: String) {
+        // Navigates to clicked subreddit on the post list item
+        val action = MainNavDirections.actionGlobalSubredditFragment(
+            location = subreddit
         )
         navigateSafe(action)
     }

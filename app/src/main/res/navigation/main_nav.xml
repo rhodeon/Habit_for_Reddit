@@ -72,4 +72,7 @@
             app:destination="@id/threadFragment" />
     </fragment>
     <action android:id="@+id/action_global_threadFragment" app:destination="@id/threadFragment" />
+    <action
+        android:id="@+id/action_global_subredditFragment"
+        app:destination="@id/subredditFragment" />
 </navigation>
