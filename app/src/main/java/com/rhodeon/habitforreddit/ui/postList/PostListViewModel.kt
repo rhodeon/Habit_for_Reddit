@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.rhodeon.habitforreddit.models.link.Link
+import com.rhodeon.habitforreddit.utils.SUBREDDIT_PREFIX
+import com.rhodeon.habitforreddit.utils.USERNAME_PREFIX
 
 /**
  * Created by Ruona Onobrakpeya on 12/30/20.
@@ -29,10 +31,10 @@ class PostListViewModel(val subreddit: String?, val username: String?) : ViewMod
     init {
         // Set query depending on host fragment
         url = if (subreddit == null) {
-            "/user/${username}/submitted"   // User profile fragment
+            "$USERNAME_PREFIX$username/submitted"   // User profile fragment
         }
         else {
-            "r/$subreddit"  // Subreddit fragment
+            SUBREDDIT_PREFIX + subreddit  // Subreddit fragment
         }
     }
     val posts: LiveData<PagingData<Link>> = fetchPosts(url)

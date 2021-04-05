@@ -12,6 +12,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.rhodeon.habitforreddit.databinding.FragmentSubredditBinding
 import com.rhodeon.habitforreddit.ui.postList.PostListFragment
 import com.rhodeon.habitforreddit.ui.postList.PostListFragmentArgs
+import com.rhodeon.habitforreddit.utils.SUBREDDIT_PREFIX
 
 /**
  * Created by Ruona Onobrakpeya on 12/30/20.
@@ -54,7 +55,7 @@ class SubredditFragment : Fragment() {
     }
 
     private fun setTitle() {
-        binding.toolbar.title = subredditViewModel.location.capitalize()
+        binding.toolbar.title = SUBREDDIT_PREFIX + subredditViewModel.location
     }
 
     override fun onDestroy() {

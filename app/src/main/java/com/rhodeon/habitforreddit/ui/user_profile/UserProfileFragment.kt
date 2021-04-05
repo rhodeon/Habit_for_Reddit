@@ -11,6 +11,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.rhodeon.habitforreddit.databinding.FragmentUserProfileBinding
 import com.rhodeon.habitforreddit.ui.postList.PostListFragment
 import com.rhodeon.habitforreddit.ui.postList.PostListFragmentArgs
+import com.rhodeon.habitforreddit.utils.USERNAME_PREFIX
 
 /**
  * Created by Ruona Onobrakpeya on 05/04/2021.
@@ -45,7 +46,7 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun setTitle() {
-        binding.toolbar.title = args.username
+        binding.toolbar.title = USERNAME_PREFIX + args.username
     }
 }
 
