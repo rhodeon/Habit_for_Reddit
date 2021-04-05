@@ -66,13 +66,31 @@
         tools:layout="@layout/fragment_post_list">
         <argument
             android:name="subreddit"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <action
             android:id="@+id/action_postListFragment_to_threadFragment2"
             app:destination="@id/threadFragment" />
+        <argument
+            android:name="username"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <action android:id="@+id/action_global_threadFragment" app:destination="@id/threadFragment" />
     <action
         android:id="@+id/action_global_subredditFragment"
         app:destination="@id/subredditFragment" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.rhodeon.habitforreddit.ui.user_profile.UserProfileFragment"
+        android:label="UserProfileFragment" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_userProfileFragment"
+        app:destination="@id/userProfileFragment" />
 </navigation>
