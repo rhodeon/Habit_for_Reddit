@@ -34,10 +34,10 @@ class PostListPagingSource(private val location: String) : PagingSource<String, 
         return LoadResult.Error(Exception())
     }
 
-    private suspend fun fetchPosts(location: String, page: String?): LinkListing? {
+    private suspend fun fetchPosts(url: String, page: String?): LinkListing? {
         return try {
             val response = SubredditRequests(SessionManager.token).oAuthService2().getPosts(
-                url = "/r/$location/",
+                url = url,
                 after = page
             )
             val postResponse: LinkListing? = response.body()
