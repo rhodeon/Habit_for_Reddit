@@ -16,7 +16,6 @@ import com.rhodeon.habitforreddit.databinding.FragmentPostListBinding
 import com.rhodeon.habitforreddit.extensions.collapse
 import com.rhodeon.habitforreddit.extensions.navigateSafe
 import com.rhodeon.habitforreddit.models.link.Link
-import com.rhodeon.habitforreddit.models.subreddit.Subreddit
 import kotlinx.coroutines.launch
 
 /**
@@ -40,7 +39,7 @@ class PostListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        postListViewModelFactory = PostListViewModelFactory(args.subreddit)
+        postListViewModelFactory = PostListViewModelFactory(args.subreddit, args.username)
         _binding = FragmentPostListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -60,7 +59,8 @@ class PostListFragment : Fragment() {
     private fun setUpAdapter() {
         adapter = PostListAdapter(
             { navigateToComments(it) },
-            { navigateToSubreddit(it) }
+            { navigateToSubreddit(it) },
+            { navigateToAuthor(it!!) }
         )
 
         adapter.addLoadStateListener {
@@ -95,6 +95,14 @@ class PostListFragment : Fragment() {
         // Navigates to clicked subreddit on the post list item
         val action = MainNavDirections.actionGlobalSubredditFragment(
             location = subreddit
+        )
+        navigateSafe(action)
+    }
+
+    private fun navigateToAuthor(author: String) {
+        // Navigates to clicked user on the post list item
+        val action = MainNavDirections.actionGlobalUserProfileFragment(
+            username = author
         )
         navigateSafe(action)
     }

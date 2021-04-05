@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rhodeon.habitforreddit.databinding.ItemPostHeaderBinding
 import com.rhodeon.habitforreddit.models.link.Link
-import com.rhodeon.habitforreddit.models.subreddit.Subreddit
 import com.rhodeon.habitforreddit.utils.DiffCallbackDelegate
 import com.rhodeon.habitforreddit.utils.bindPostHeader
 import kotlinx.android.synthetic.main.item_post_header.view.*
@@ -18,7 +17,8 @@ import kotlinx.android.synthetic.main.item_post_header.view.*
 
 class PostListAdapter(
     val clickHandler: (Link) -> Unit,
-    val subredditClickHandler: (String) -> Unit
+    val subredditClickHandler: (String) -> Unit,
+    val authorClickHandler: (String?) -> Unit
 ) : PagingDataAdapter<Link, PostListViewHolder>(DIFF_CALLBACK) {
     companion object {
         val DIFF_CALLBACK: DiffUtil.ItemCallback<Link> by DiffCallbackDelegate()
@@ -42,6 +42,10 @@ class PostListAdapter(
 
         holder.itemView.subreddit.setOnClickListener {
             subredditClickHandler(currentItem.data.subreddit)
+        }
+
+        holder.itemView.author.setOnClickListener {
+            authorClickHandler(currentItem.data.author)
         }
     }
 }
