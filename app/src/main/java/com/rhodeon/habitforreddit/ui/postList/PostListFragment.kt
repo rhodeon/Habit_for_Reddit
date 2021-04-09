@@ -31,7 +31,6 @@ class PostListFragment : Fragment() {
 
     private var _binding: FragmentPostListBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var adapter: PostListAdapter
 
     override fun onCreateView(

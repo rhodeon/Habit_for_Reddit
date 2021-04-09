@@ -32,9 +32,7 @@ class UserCommentsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         viewModelFactory = UserCommentsViewModelFactory(args.username)
-
         _binding = FragmentUserCommentsBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -29,15 +29,14 @@ class ThreadFragment : Fragment() {
 
     private var _binding: FragmentThreadBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: CommentsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         factory = CommentsViewModelFactory(args.permalink)
-
         _binding = FragmentThreadBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -50,20 +49,26 @@ class ThreadFragment : Fragment() {
         }
 
         bindPostData()
-
-        val adapter = CommentsListAdapter()
-        binding.commentRecyclerView.adapter = adapter
-
-        val viewModelObserver = Observer<List<CommentListing>> { response ->
-            adapter.submitList(response[1].data.children)
-            binding.progressBar.collapse()
-        }
-        viewModel.response.observe(viewLifecycleOwner, viewModelObserver)
+        setUpAdapter()
+        setUpObserver()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun setUpAdapter() {
+        adapter = CommentsListAdapter()
+        binding.commentRecyclerView.adapter = adapter
+    }
+
+    private fun setUpObserver() {
+        val viewModelObserver = Observer<List<CommentListing>> { response ->
+            adapter.submitList(response[1].data.children)
+            binding.progressBar.collapse()
+        }
+        viewModel.response.observe(viewLifecycleOwner, viewModelObserver)
     }
 
     /**

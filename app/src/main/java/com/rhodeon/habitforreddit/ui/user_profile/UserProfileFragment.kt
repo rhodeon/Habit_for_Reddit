@@ -25,6 +25,7 @@ class UserProfileFragment : Fragment() {
 
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
+    private lateinit var userStateAdapter: UserStateAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,29 +33,36 @@ class UserProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUserProfileBinding.inflate(inflater, container, false)
-
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
-        }
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setTitle()
+        setupToolbar()
+        setUpViewPager()
+    }
 
-        val userStateAdapter = UserStateAdapter(this, args.username, userProfileViewModel)
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.title = USERNAME_PREFIX + args.username
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
+    private fun setUpViewPager() {
+        userStateAdapter = UserStateAdapter(this, args.username, userProfileViewModel)
         binding.userPager.adapter = userStateAdapter
 
         TabLayoutMediator(binding.userTab, binding.userPager) { tab, position ->
             tab.text = UserProfileTab.values()[position].endpoint
         }.attach()
-    }
-
-    private fun setTitle() {
-        binding.toolbar.title = USERNAME_PREFIX + args.username
     }
 }
 

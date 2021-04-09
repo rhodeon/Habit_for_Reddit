@@ -16,9 +16,11 @@ import com.rhodeon.habitforreddit.ui.postList.PostListFragmentArgs
  */
 
 class HomeFeedFragment : Fragment() {
+    private val homeFeedViewModel: HomeFeedViewModel by viewModels()
+
     private var _binding: FragmentHomeFeedBinding? = null
     private val binding get() = _binding!!
-    private val homeFeedViewModel: HomeFeedViewModel by viewModels()
+    private lateinit var postStateAdapter: PostStateAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,21 +34,27 @@ class HomeFeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbar.setNavigationOnClickListener {
-            showBottomDialog()
-        }
-
-        val postStateAdapter = PostStateAdapter(this, homeFeedViewModel)
-        binding.postPager.adapter = postStateAdapter
-
-        TabLayoutMediator(binding.locationTab, binding.postPager) { tab, position ->
-            tab.text = HomeFeedTab.values()[position].endpoint
-        }.attach()
+        setUpToolbar()
+        setupViewPager()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun setUpToolbar() {
+        binding.toolbar.setNavigationOnClickListener {
+            showBottomDialog()
+        }
+    }
+    private fun setupViewPager() {
+        postStateAdapter = PostStateAdapter(this, homeFeedViewModel)
+        binding.postPager.adapter = postStateAdapter
+
+        TabLayoutMediator(binding.locationTab, binding.postPager) { tab, position ->
+            tab.text = HomeFeedTab.values()[position].endpoint
+        }.attach()
     }
 
     private fun showBottomDialog() {
