@@ -49,7 +49,7 @@ class UserProfileFragment : Fragment() {
         binding.userPager.adapter = userStateAdapter
 
         TabLayoutMediator(binding.userTab, binding.userPager) { tab, position ->
-            tab.text = userProfileViewModel.userTabs[position]
+            tab.text = UserProfileTab.values()[position].endpoint
         }.attach()
     }
 
@@ -63,7 +63,7 @@ class UserStateAdapter(
     private val location: String,
     private val viewModel: UserProfileViewModel
 ) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int = viewModel.userTabs.size
+    override fun getItemCount(): Int = UserProfileTab.values().size
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {

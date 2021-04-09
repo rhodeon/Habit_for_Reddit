@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.rhodeon.habitforreddit.models.link.Link
+import com.rhodeon.habitforreddit.ui.user_profile.UserProfileTab
 import com.rhodeon.habitforreddit.utils.SUBREDDIT_PREFIX
 import com.rhodeon.habitforreddit.utils.USERNAME_PREFIX
 
@@ -31,7 +32,7 @@ class PostListViewModel(val subreddit: String?, val username: String?) : ViewMod
     init {
         // Set query depending on host fragment
         url = if (subreddit == null) {
-            "$USERNAME_PREFIX$username/submitted"   // User profile fragment
+            "$USERNAME_PREFIX$username${UserProfileTab.Submitted.endpoint}"   // User profile fragment
         }
         else {
             SUBREDDIT_PREFIX + subreddit  // Subreddit fragment

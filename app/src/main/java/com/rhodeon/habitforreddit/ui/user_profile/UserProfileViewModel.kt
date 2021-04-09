@@ -12,5 +12,4 @@ import com.rhodeon.habitforreddit.models.link.LinkListing
 class UserProfileViewModel : ViewModel() {
     private val _response = MutableLiveData<LinkListing>()
     val response: LiveData<LinkListing> = _response
-    val userTabs = listOf("Posts", "Comments")
 }

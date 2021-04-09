@@ -42,7 +42,7 @@ class UserCommentsViewModel(private val permalink: String) : ViewModel() {
         return withContext(Dispatchers.IO) {
             try {
                 val response = UserRequests(SessionManager.token).oAuthService2()
-                    .getComments("${USERNAME_PREFIX}${permalink}/comments")
+                    .getComments("${USERNAME_PREFIX}${permalink}${UserProfileTab.Comments.endpoint}")
                 val commentResponse: CommentListing? = response.body()
 
                 if (commentResponse != null) {

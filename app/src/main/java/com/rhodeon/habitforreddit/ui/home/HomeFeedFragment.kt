@@ -40,7 +40,7 @@ class HomeFeedFragment : Fragment() {
         binding.postPager.adapter = postStateAdapter
 
         TabLayoutMediator(binding.locationTab, binding.postPager) { tab, position ->
-            tab.text = homeFeedViewModel.locationList[position]
+            tab.text = HomeFeedTab.values()[position].endpoint
         }.attach()
     }
 
@@ -54,12 +54,12 @@ class HomeFeedFragment : Fragment() {
     }
 }
 
-class PostStateAdapter(fragment: Fragment, val viewModel: HomeFeedViewModel) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int = viewModel.locationList.size
+class PostStateAdapter(fragment: Fragment, private val viewModel: HomeFeedViewModel) : FragmentStateAdapter(fragment) {
+    override fun getItemCount(): Int = HomeFeedTab.values().size
 
     override fun createFragment(position: Int): Fragment {
         val fragment = PostListFragment()
-        val args = PostListFragmentArgs(subreddit = viewModel.locationList[position])
+        val args = PostListFragmentArgs(subreddit = HomeFeedTab.values()[position].endpoint)
         fragment.arguments = args.toBundle()
         return fragment
     }

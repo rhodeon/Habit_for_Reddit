@@ -7,5 +7,4 @@ import androidx.lifecycle.*
  */
 
 class HomeFeedViewModel : ViewModel() {
-    var locationList = listOf("Popular", "All")     // Holds the starting subreddits
 }
