@@ -41,7 +41,7 @@ class UserCommentsViewModel(private val permalink: String) : ViewModel() {
     private suspend fun getComments(): CommentListing? {
         return withContext(Dispatchers.IO) {
             try {
-                val response = APIService(SessionManager.token).userRequests()
+                val response = APIService().userRequests()
                     .getComments("${USERNAME_PREFIX}${permalink}${UserProfileTab.Comments.endpoint}")
                 val commentResponse: CommentListing? = response.body()
 

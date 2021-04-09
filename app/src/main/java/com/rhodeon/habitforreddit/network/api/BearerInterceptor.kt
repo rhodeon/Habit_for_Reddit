@@ -8,7 +8,7 @@ import okhttp3.Response
  * Created by Ruona Onobrakpeya on 12/22/20.
  */
 
-class BearerInterceptor(val token: String) : Interceptor {
+class BearerInterceptor(private val token: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
             .newBuilder()

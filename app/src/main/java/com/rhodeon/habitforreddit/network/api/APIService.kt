@@ -2,6 +2,7 @@ package com.rhodeon.habitforreddit.network.api
 
 import com.rhodeon.habitforreddit.network.api.subreddit.SubredditRequests
 import com.rhodeon.habitforreddit.network.api.user.UserRequests
+import com.rhodeon.habitforreddit.utils.SessionManager
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -13,7 +14,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 /**
  * A common class for creating retrofit instances for API requests
  */
-class APIService(private val token: String) {
+class APIService {
+    private val token = SessionManager.token
+
     private val client: OkHttpClient = OkHttpClient.Builder().apply {
         addInterceptor(BearerInterceptor(token))
     }.build()

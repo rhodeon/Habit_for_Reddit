@@ -47,7 +47,7 @@ class SubredditViewModel(val location: String) : ViewModel() {
     private suspend fun loadPosts(): LinkListing? {
         return withContext(Dispatchers.IO) {
             try {
-                val response = APIService(SessionManager.token).subredditRequests().getPosts(
+                val response = APIService().subredditRequests().getPosts(
                     url = "/r/$location/"
                 )
                 val postResponse: LinkListing? = response.body()

@@ -36,7 +36,7 @@ class PostListPagingSource(private val location: String) : PagingSource<String, 
 
     private suspend fun fetchPosts(url: String, page: String?): LinkListing? {
         return try {
-            val response = APIService(SessionManager.token).subredditRequests().getPosts(
+            val response = APIService().subredditRequests().getPosts(
                 url = url,
                 after = page
             )
