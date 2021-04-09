@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rhodeon.habitforreddit.models.comment.CommentListing
-import com.rhodeon.habitforreddit.network.api.subreddit.SubredditRequests
+import com.rhodeon.habitforreddit.network.api.APIService
 import com.rhodeon.habitforreddit.utils.SessionManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +40,7 @@ class CommentsViewModel(private val permalink: String) : ViewModel() {
     private suspend fun getComments(): List<CommentListing>? {
         return withContext(Dispatchers.IO) {
             try {
-                val response = SubredditRequests(SessionManager.token).oAuthService2().getComments(permalink)
+                val response = APIService(SessionManager.token).subredditRequests().getComments(permalink)
 
                 val commentResponse: List<CommentListing>? = response.body()
 

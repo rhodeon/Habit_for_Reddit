@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_homeFeedFragment_to_menuBottomDialogFragment"
             app:destination="@id/menuBottomDialogFragment" />
-        <action
-            android:id="@+id/action_homeFeedFragment_to_commentsFragment"
-            app:destination="@id/threadFragment" />
     </fragment>
     <dialog
         android:id="@+id/menuBottomDialogFragment"
@@ -72,9 +69,6 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
-        <action
-            android:id="@+id/action_postListFragment_to_threadFragment2"
-            app:destination="@id/threadFragment" />
         <argument
             android:name="username"
             app:argType="string"

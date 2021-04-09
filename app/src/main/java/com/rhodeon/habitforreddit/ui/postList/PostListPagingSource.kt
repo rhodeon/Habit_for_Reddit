@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import com.rhodeon.habitforreddit.models.link.Link
 import com.rhodeon.habitforreddit.models.link.LinkListing
-import com.rhodeon.habitforreddit.network.api.subreddit.SubredditRequests
+import com.rhodeon.habitforreddit.network.api.APIService
 import com.rhodeon.habitforreddit.utils.SessionManager
 
 /**
@@ -36,7 +36,7 @@ class PostListPagingSource(private val location: String) : PagingSource<String, 
 
     private suspend fun fetchPosts(url: String, page: String?): LinkListing? {
         return try {
-            val response = SubredditRequests(SessionManager.token).oAuthService2().getPosts(
+            val response = APIService(SessionManager.token).subredditRequests().getPosts(
                 url = url,
                 after = page
             )

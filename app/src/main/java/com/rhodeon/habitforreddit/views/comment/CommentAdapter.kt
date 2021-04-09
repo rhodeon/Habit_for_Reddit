@@ -14,11 +14,10 @@ import com.rhodeon.habitforreddit.utils.mapToJson
  * Created by Ruona Onobrakpeya on 1/9/21.
  */
 
-
 /**
  * Adapts a comment response to a comment view
  */
-class CommentAdapter(val comment: Comment, private val commentLayout: CommentLayout, private val context: Context) {
+class CommentAdapter(val comment: Comment, private val commentLayout: CommentLayout, context: Context) {
     init {
         bind(comment, commentLayout, context)
     }

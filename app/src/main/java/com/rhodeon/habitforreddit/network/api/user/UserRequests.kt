@@ -14,30 +14,14 @@ import retrofit2.http.Url
  * Created by Ruona Onobrakpeya on 05/04/2021.
  */
 
-class UserRequests(private val token: String) {
-    private val client: OkHttpClient = OkHttpClient.Builder().apply {
-        addInterceptor(BearerInterceptor(token))
-    }.build()
+interface UserRequests {
+    @GET
+    suspend fun getPosts(
+        @Url url: String
+    ): Response<LinkListing>
 
-    fun oAuthService2(): UserRequests.User {
-        val retrofit = Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
-            .baseUrl("https://oauth.reddit.com")
-            .client(client)
-            .build()
-
-        return retrofit.create(UserRequests.User::class.java)
-    }
-
-    interface User {
-        @GET
-        suspend fun getPosts(
-            @Url url: String
-        ): Response<LinkListing>
-
-        @GET
-        suspend fun getComments(
-            @Url url: String
-        ): Response<CommentListing>
-    }
+    @GET
+    suspend fun getComments(
+        @Url url: String
+    ): Response<CommentListing>
 }

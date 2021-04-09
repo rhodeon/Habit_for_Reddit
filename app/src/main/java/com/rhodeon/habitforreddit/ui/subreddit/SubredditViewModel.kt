@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rhodeon.habitforreddit.models.link.LinkListing
-import com.rhodeon.habitforreddit.network.api.subreddit.SubredditRequests
+import com.rhodeon.habitforreddit.network.api.APIService
 import com.rhodeon.habitforreddit.utils.SessionManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +47,7 @@ class SubredditViewModel(val location: String) : ViewModel() {
     private suspend fun loadPosts(): LinkListing? {
         return withContext(Dispatchers.IO) {
             try {
-                val response = SubredditRequests(SessionManager.token).oAuthService2().getPosts(
+                val response = APIService(SessionManager.token).subredditRequests().getPosts(
                     url = "/r/$location/"
                 )
                 val postResponse: LinkListing? = response.body()
