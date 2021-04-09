@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_subredditFragment_to_threadFragment"
             app:destination="@id/threadFragment" />
+        <action
+            android:id="@+id/action_subredditFragment_to_userCommentsFragment"
+            app:destination="@id/userCommentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/threadFragment"
@@ -93,4 +96,12 @@
     <action
         android:id="@+id/action_global_userProfileFragment"
         app:destination="@id/userProfileFragment" />
+    <fragment
+        android:id="@+id/userCommentsFragment"
+        android:name="com.rhodeon.habitforreddit.ui.user_profile.UserCommentsFragment"
+        android:label="UserCommentsFragment" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
 </navigation>

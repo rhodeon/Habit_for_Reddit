@@ -21,7 +21,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:navigationIcon="?attr/homeAsUpIndicator"
-                tools:title="the_rhodeon" />
+                tools:title="u/the_rhodeon" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/userTab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Posts" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Comments" />
+            </com.google.android.material.tabs.TabLayout>
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager2.widget.ViewPager2

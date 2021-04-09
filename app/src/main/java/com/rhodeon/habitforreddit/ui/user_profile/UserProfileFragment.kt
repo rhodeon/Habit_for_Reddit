@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.rhodeon.habitforreddit.databinding.FragmentUserProfileBinding
 import com.rhodeon.habitforreddit.ui.postList.PostListFragment
 import com.rhodeon.habitforreddit.ui.postList.PostListFragmentArgs
@@ -16,8 +18,10 @@ import com.rhodeon.habitforreddit.utils.USERNAME_PREFIX
 /**
  * Created by Ruona Onobrakpeya on 05/04/2021.
  */
+
 class UserProfileFragment : Fragment() {
     private val args: UserProfileFragmentArgs by navArgs()
+    private val userProfileViewModel: UserProfileViewModel by viewModels()
 
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
@@ -41,8 +45,12 @@ class UserProfileFragment : Fragment() {
 
         setTitle()
 
-        val userStateAdapter = UserStateAdapter(this, args.username)
+        val userStateAdapter = UserStateAdapter(this, args.username, userProfileViewModel)
         binding.userPager.adapter = userStateAdapter
+
+        TabLayoutMediator(binding.userTab, binding.userPager) { tab, position ->
+            tab.text = userProfileViewModel.userTabs[position]
+        }.attach()
     }
 
     private fun setTitle() {
@@ -50,12 +58,30 @@ class UserProfileFragment : Fragment() {
     }
 }
 
-class UserStateAdapter(fragment: Fragment, private val location: String) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int = 1
+class UserStateAdapter(
+    fragment: Fragment,
+    private val location: String,
+    private val viewModel: UserProfileViewModel
+) : FragmentStateAdapter(fragment) {
+    override fun getItemCount(): Int = viewModel.userTabs.size
 
     override fun createFragment(position: Int): Fragment {
+        return when (position) {
+            0 -> createPostListFragment()
+            else -> createCommentListFragment()
+        }
+    }
+
+    private fun createPostListFragment(): Fragment {
         val fragment = PostListFragment()
         val args = PostListFragmentArgs(username = location)
+        fragment.arguments = args.toBundle()
+        return fragment
+    }
+
+    private fun createCommentListFragment(): Fragment {
+        val fragment = UserCommentsFragment()
+        val args = UserCommentsFragmentArgs(username = location)
         fragment.arguments = args.toBundle()
         return fragment
     }
