@@ -26,4 +26,5 @@ class APIService(private val token: String) {
 
     fun subredditRequests(): SubredditRequests = retrofitInstance.create(SubredditRequests::class.java)
     fun userRequests(): UserRequests = retrofitInstance.create(UserRequests::class.java)
+    fun threadRequests(): ThreadRequests = retrofitInstance.create(ThreadRequests::class.java)
 }

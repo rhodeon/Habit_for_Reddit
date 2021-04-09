@@ -40,7 +40,7 @@ class CommentsViewModel(private val permalink: String) : ViewModel() {
     private suspend fun getComments(): List<CommentListing>? {
         return withContext(Dispatchers.IO) {
             try {
-                val response = APIService(SessionManager.token).subredditRequests().getComments(permalink)
+                val response = APIService(SessionManager.token).threadRequests().getComments(permalink)
 
                 val commentResponse: List<CommentListing>? = response.body()
 
