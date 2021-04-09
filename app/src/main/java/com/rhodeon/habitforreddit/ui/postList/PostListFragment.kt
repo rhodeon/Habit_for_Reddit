@@ -107,4 +107,3 @@ class PostListFragment : Fragment() {
         navigateSafe(action)
     }
 }
-
