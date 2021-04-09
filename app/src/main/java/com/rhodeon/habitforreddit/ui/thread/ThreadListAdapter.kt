@@ -14,7 +14,9 @@ import kotlinx.android.synthetic.main.view_comment.view.*
  * Created by Ruona Onobrakpeya on 12/31/20.
  */
 
-class CommentsListAdapter : androidx.recyclerview.widget.ListAdapter<Comment, CommentsViewHolder>(
+class CommentsListAdapter(
+    val authorClickHandler: (String?) -> Unit
+) : androidx.recyclerview.widget.ListAdapter<Comment, CommentsViewHolder>(
     DIFF_CALLBACK
 ) {
     companion object {
@@ -35,7 +37,14 @@ class CommentsListAdapter : androidx.recyclerview.widget.ListAdapter<Comment, Co
             innerLayout.removeViews(1, innerLayout.childCount - 1)
         }
 
-        holder.bind(getItem(position))
+        val currentComment = getItem(position)
+
+        holder.bind(currentComment)
+
+        //TODO: Use hilt to pass listener to nested comments
+        holder.binding.commentLayout.binding.author.setOnClickListener {
+            authorClickHandler(currentComment.data.author)
+        }
     }
 }
 

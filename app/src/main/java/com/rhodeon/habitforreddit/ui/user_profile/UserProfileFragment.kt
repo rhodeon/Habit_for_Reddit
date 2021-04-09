@@ -61,7 +61,7 @@ class UserProfileFragment : Fragment() {
         binding.userPager.adapter = userStateAdapter
 
         TabLayoutMediator(binding.userTab, binding.userPager) { tab, position ->
-            tab.text = UserProfileTab.values()[position].endpoint
+            tab.text = UserProfileTab.values()[position].name
         }.attach()
     }
 }

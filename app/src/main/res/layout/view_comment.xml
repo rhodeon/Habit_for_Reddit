@@ -34,9 +34,14 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                android:textColor="@color/link"
+                android:textAllCaps="false"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="rhodeon" />
+                tools:text="rhodeon"
+                android:focusable="true" />
 
             <TextView
                 android:id="@+id/timestamp"
