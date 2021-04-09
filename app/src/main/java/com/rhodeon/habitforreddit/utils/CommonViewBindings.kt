@@ -21,6 +21,7 @@ fun bindPostHeader(postData: LinkData, binding: ItemPostHeaderBinding) {
         author.text = "$USERNAME_PREFIX${postData.author}"
         subreddit.text = "$SUBREDDIT_PREFIX${postData.subreddit}"
         karma.text = postData.score.toString()
+        comments.text = postData.commentCount.toString()
 
         when (postData.thumbnail) {
             "self", "image", "default" -> thumbnail.collapse()
