@@ -90,15 +90,4 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/commentFAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_anchor="@id/nestedScrollView"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/ic_quill" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
