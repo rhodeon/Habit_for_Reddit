@@ -2,7 +2,6 @@ package com.rhodeon.habitforreddit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rhodeon.habitforreddit.databinding.ActivityMainBinding
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             val newToken = requestAccessToken()
-            Toast.makeText(this@MainActivity, "$newToken", Toast.LENGTH_SHORT).show()
             if (newToken != null) {
                 SessionManager.token = newToken
             }
